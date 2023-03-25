@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}- les agents{% endblock %}
+
+{% block body %}
+<div class="container">
+<div>
+    <h1 class="mt-4">Création d'un agent</h1>
+        <div class="row g-3 lo">
+        {{ form_start(form) }}
+
+        <div class="form-group col-md-6">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            <div class="form-error">
+                {{ form_errors(form.name) }}
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            {{ form_label(form.firstName) }}
+            {{ form_widget(form.firstName) }}
+            <div class="form-error">
+                {{ form_errors(form.firstName) }}
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            {{ form_label(form.dateOfBirth) }}
+            {{ form_widget(form.dateOfBirth) }}
+            <div class="form-error">
+                {{ form_errors(form.dateOfBirth) }}
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            {{ form_label(form.identificationCode) }}
+            {{ form_widget(form.identificationCode) }}
+            <div class="form-error">
+                {{ form_errors(form.identificationCode) }}
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            {{ form_label(form.nationalite) }}
+            {{ form_widget(form.nationalite) }}
+            <div class="form-error">
+                {{ form_errors(form.nationalite) }}
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            {{ form_label(form.specialite) }}
+            {{ form_widget(form.specialite) }}
+            <div class="form-error">
+                {{ form_errors(form.specialite) }}
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            {{ form_label(form.submit) }}
+            {{ form_widget(form.submit) }}
+        </div>
+
+    {{ form_rest(form) }}
+    </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
