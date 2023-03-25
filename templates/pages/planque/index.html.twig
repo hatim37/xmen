@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}- les planques{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<h1 class="mt-4">Nos planques</h1>
+		{% if not planque.items is same as ([]) %}
+        
+		<h3>
+			<div class="count mt-4">Nous avons {{ planque.getTotalItemCount }} planques disponibles</div>
+		</h3>
+
+        <a href="{{ path('planque.new') }}" class="btn btn-primary ">Ajouter une planque</a>
+   
+		{% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-3">
+        {{ message }}</div>
+    	{% endfor %}
+
+		<div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+			{% for planque in planque %}
+				<div class="col">
+					<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+						<div class="card-header">Code : {{ planque.code }}</div>
+						<img class="card-img-top" src="..." alt="Card image cap">
+						<div class="card-body">
+							<h5 class="card-title">Type : {{ planque.type }}</h5>
+							<p class="card-text">Adresse : {{ planque.address }}</p>
+						</div>
+						<div class= "d-flex justify-content-evenly m-4">
+							<a href="{{ path('planque.edit', { id: planque.id }) }}" class="btn btn-info">Modifier</a>
+							<a href="{{ path('planque.delete', { id: planque.id }) }}" class="btn btn-danger">Supprimer</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<div class="navigation d-flex justify-content-center mt-4">{{ knp_pagination_render(planque) }}</div>
+		{% else %}
+        <h4>Aucune planque n'a été trouvé</h4>
+		<a href="{{ path('planque.new') }}" class="btn btn-primary ">Ajouter une planque</a>
+        {% endif %}
+	</div>
+
+{% endblock %}

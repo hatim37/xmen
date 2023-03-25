@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}- Créer une planque{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <h1 class="mt-4">Création d'une planque</h1>
+        <div class="row g-3">
+        {{ form_start(form) }}
+
+        <div class="form-group col-md-6">
+            {{ form_label(form.code) }}
+            {{ form_widget(form.code) }}
+            <div class="form-error">
+                {{ form_errors(form.code) }}
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            {{ form_label(form.address) }}
+            {{ form_widget(form.address) }}
+            <div class="form-error">
+                {{ form_errors(form.address) }}
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            {{ form_label(form.type) }}
+            {{ form_widget(form.type) }}
+            <div class="form-error">
+                {{ form_errors(form.type) }}
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            {{ form_label(form.pays) }}
+            {{ form_widget(form.pays) }}
+            <div class="form-error">
+                {{ form_errors(form.pays) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.submit) }}
+            {{ form_widget(form.submit) }}
+        </div>
+
+        {{ form_rest(form) }}
+        
+
+    </div>
+</div>
+{% endblock %}

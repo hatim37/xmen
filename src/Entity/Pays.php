@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PaysRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -22,6 +24,14 @@ class Pays
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Nationalite $nationalite = null;
+
+    #[ORM\OneToMany(mappedBy: 'pays', targetEntity: Planque::class)]
+    private Collection $planques;
+
+    public function __construct()
+    {
+        $this->planques = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -48,6 +58,36 @@ class Pays
     public function setNationalite(?Nationalite $nationalite): self
     {
         $this->nationalite = $nationalite;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Planque>
+     */
+    public function getPlanques(): Collection
+    {
+        return $this->planques;
+    }
+
+    public function addPlanque(Planque $planque): self
+    {
+        if (!$this->planques->contains($planque)) {
+            $this->planques->add($planque);
+            $planque->setPays($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlanque(Planque $planque): self
+    {
+        if ($this->planques->removeElement($planque)) {
+            // set the owning side to null (unless already changed)
+            if ($planque->getPays() === $this) {
+                $planque->setPays(null);
+            }
+        }
 
         return $this;
     }
