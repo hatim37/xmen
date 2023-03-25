@@ -2,17 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\AgentRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Repository\CibleRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[UniqueEntity(fields: ['name', 'firstName', 'identificationCode'], message: 'Cette Agent ou code d\'identification existe déjà')]
-#[ORM\Entity(repositoryClass: AgentRepository::class)]
-class Agent
+#[UniqueEntity(fields: ['name', 'firstName'], message: 'Cette cible existe déjà')]
+#[ORM\Entity(repositoryClass: CibleRepository::class)]
+class Cible
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -28,25 +26,16 @@ class Agent
     private ?string $firstName = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\NotNull(message:'Veulliez renseigner une date')]
+    #[Assert\NotNull(message:'Veulliez sélectionner une dates')]
     private ?\DateTimeInterface $dateOfBirth = null;
 
-    #[ORM\Column]
-    #[Assert\NotNull(message:'Veulliez renseigner un code d\'identification')]
-    private ?int $identificationCode = null;
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:'Veulliez renseigner un nom de code')]
+    private ?string $codeName = null;
 
-    #[ORM\ManyToOne(inversedBy: 'agents')]
+    #[ORM\ManyToOne(inversedBy: 'cibles')]
     #[Assert\NotNull(message:'Veulliez sélectionner une nationalité')]
     private ?Nationalite $nationalite = null;
-
-    #[ORM\ManyToMany(targetEntity: Specialite::class, inversedBy: 'agents')]
-    #[Assert\NotNull(message:'Veulliez sélectionner une spécialité')]
-    private Collection $specialite;
-
-    public function __construct()
-    {
-        $this->specialite = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -89,14 +78,14 @@ class Agent
         return $this;
     }
 
-    public function getIdentificationCode(): ?int
+    public function getCodeName(): ?string
     {
-        return $this->identificationCode;
+        return $this->codeName;
     }
 
-    public function setIdentificationCode(int $identificationCode): self
+    public function setCodeName(string $codeName): self
     {
-        $this->identificationCode = $identificationCode;
+        $this->codeName = $codeName;
 
         return $this;
     }
@@ -111,34 +100,5 @@ class Agent
         $this->nationalite = $nationalite;
 
         return $this;
-    }
-
-    /**
-     * @return Collection<int, Specialite>
-     */
-    public function getSpecialite(): Collection
-    {
-        return $this->specialite;
-    }
-
-    public function addSpecialite(Specialite $specialite): self
-    {
-        if (!$this->specialite->contains($specialite)) {
-            $this->specialite->add($specialite);
-        }
-
-        return $this;
-    }
-
-    public function removeSpecialite(Specialite $specialite): self
-    {
-        $this->specialite->removeElement($specialite);
-
-        return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->name;
     }
 }

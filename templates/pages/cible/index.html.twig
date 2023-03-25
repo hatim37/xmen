@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}- les cibles{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<h1 class="mt-4">Nos cibles</h1>
+		{% if not cible.items is same as ([]) %}
+        
+		<h3>
+			<div class="count mt-4">Nous avons {{ cible.getTotalItemCount }} cibles disponibles</div>
+		</h3>
+
+        <a href="{{ path('cible.new') }}" class="btn btn-primary ">Ajouter une cible</a>
+   
+		{% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-3">
+        {{ message }}</div>
+    	{% endfor %}
+
+		<div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+			{% for cible in cible %}
+				<div class="col">
+					<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+						<div class="card-header">Nom de Code : {{ cible.codeName }}</div>
+						<img class="card-img-top" src="..." alt="Card image cap">
+						<div class="card-body">
+							<h5 class="card-title">{{ cible.name }}
+								{{ cible.firstname }}</h5>
+							<p class="card-text">Date de naisance :{{ cible.dateOfBirth | date('d/m/Y') }}</p>
+						</div>
+						<div class= "d-flex justify-content-evenly m-4">
+							<a href="{{ path('cible.edit', { id: cible.id }) }}" class="btn btn-info">Modifier</a>
+							<a href="{{ path('cible.delete', { id: cible.id }) }}" class="btn btn-danger">Supprimer</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<div class="navigation d-flex justify-content-center mt-4">{{ knp_pagination_render(cible) }}</div>
+		{% else %}
+        <h4>Aucune cible n'a été trouvé</h4>
+        <a href="{{ path('cible.new') }}" class="btn btn-primary ">Ajouter une cible</a>
+        {% endif %}
+	</div>
+
+{% endblock %}
