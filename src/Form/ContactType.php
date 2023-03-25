@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Cible;
+use App\Entity\Contact;
 use App\Entity\Nationalite;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -12,15 +12,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
-class CibleType extends AbstractType
+class ContactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
         ->add('name', TextType::class, [
             'attr' => [
-                'class' => 'form-control',
+                'class' => 'form-control'
             ],
             'label' => 'Nom', 
             'required' => true,
@@ -30,7 +29,7 @@ class CibleType extends AbstractType
             ])
         ->add('firstName', TextType::class, [
             'attr' => [
-                'class' => 'form-control',
+                'class' => 'form-control'
             ],
             'label' => 'Prénom', 
             'required' => true,
@@ -47,11 +46,11 @@ class CibleType extends AbstractType
             'required' => true,
             'label_attr' => [
                 'class' => 'form-label mt-4'
-            ],  
+            ]
             ])
         ->add('codeName', TextType::class, [
             'attr' => [
-                'class' => 'form-control',
+                'class' => 'form-control'
             ],
             'label' => 'Nom de code', 
             'required' => true,
@@ -59,12 +58,6 @@ class CibleType extends AbstractType
                 'class' => 'form-label mt-4'
             ]
             ])
-        ->add('submit', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary mt-4',
-                ],
-                'label' => 'Créer une cible'
-                ])
         ->add('nationalite', EntityType::class, [
             'class' => Nationalite::class,
             'placeholder' => 'selectionner une nationalité',
@@ -78,17 +71,17 @@ class CibleType extends AbstractType
             ]
         ])
         ->add('submit', SubmitType::class, [
-            'attr' => [
-                'class' => 'btn btn-primary mt-4',
-            ],
-            'label' => 'Créer une cible'
-            ]);
+                'attr' => [
+                    'class' => 'btn btn-primary mt-4',
+                ],
+                'label' => 'Créer un contact'
+                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Cible::class,
+            'data_class' => Contact::class,
         ]);
     }
 }

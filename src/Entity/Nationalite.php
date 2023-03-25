@@ -28,10 +28,14 @@ class Nationalite
     #[ORM\OneToMany(mappedBy: 'nationalite', targetEntity: Cible::class)]
     private Collection $cibles;
 
+    #[ORM\OneToMany(mappedBy: 'nationalite', targetEntity: Contact::class)]
+    private Collection $contacts;
+
     public function __construct()
     {
         $this->agents = new ArrayCollection();
         $this->cibles = new ArrayCollection();
+        $this->contacts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,6 +109,36 @@ class Nationalite
             // set the owning side to null (unless already changed)
             if ($cible->getNationalite() === $this) {
                 $cible->setNationalite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contact>
+     */
+    public function getContacts(): Collection
+    {
+        return $this->contacts;
+    }
+
+    public function addContact(Contact $contact): self
+    {
+        if (!$this->contacts->contains($contact)) {
+            $this->contacts->add($contact);
+            $contact->setNationalite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContact(Contact $contact): self
+    {
+        if ($this->contacts->removeElement($contact)) {
+            // set the owning side to null (unless already changed)
+            if ($contact->getNationalite() === $this) {
+                $contact->setNationalite(null);
             }
         }
 

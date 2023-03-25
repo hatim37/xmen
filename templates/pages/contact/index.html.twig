@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}- les contacts{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<h1 class="mt-4">Nos contacts</h1>
+		{% if not contact.items is same as ([]) %}
+        
+		<h3>
+			<div class="count mt-4">Nous avons {{ contact.getTotalItemCount }} contacts disponibles</div>
+		</h3>
+
+        <a href="{{ path('contact.new') }}" class="btn btn-primary ">Ajouter une contact</a>
+   
+		{% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-3">
+        {{ message }}</div>
+    	{% endfor %}
+
+		<div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+			{% for contact in contact %}
+				<div class="col">
+					<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+						<div class="card-header">Code : {{ contact.codeName }}</div>
+						<img class="card-img-top" src="..." alt="Card image cap">
+						<div class="card-body">
+							<h5 class="card-title">{{ contact.name }}
+								{{ contact.firstname }}</h5>
+							<p class="card-text">Date de naisance :{{ contact.dateOfBirth | date('d/m/Y') }}</p>
+						</div>
+						<div class= "d-flex justify-content-evenly m-4">
+							<a href="{{ path('contact.edit', { id: contact.id }) }}" class="btn btn-info">Modifier</a>
+							<a href="{{ path('contact.delete', { id: contact.id }) }}" class="btn btn-danger">Supprimer</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<div class="navigation d-flex justify-content-center mt-4">{{ knp_pagination_render(contact) }}</div>
+		{% else %}
+        <h4>Aucune contact n'a été trouvé</h4>
+        <a href="{{ path('contact.new') }}" class="btn btn-primary ">Ajouter une contact</a>
+        {% endif %}
+	</div>
+
+{% endblock %}
