@@ -7,16 +7,14 @@
     	<meta name="description" content="La fondation X-Men une application qui va te permettre de retrouver tous nos super-héros sur le terrain">
 
 		<title>
-			{% block title %}X-Men
-			{% endblock %}
+			{% block title %}X-Men{% endblock %}
 		</title>
 		<link rel="icon" type="image/png" href="{{ asset('images/icon.png') }}"/>
 		{% block stylesheets %}
-			{{ encore_entry_link_tags('app') }}
-			<link href="{{ asset('/assets/styles.css') }}" rel="stylesheet"/>
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/darkly/bootstrap.min.css">
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/darkly/_variables.scss">
 			<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+			<link href="{{ asset('/assets/styles.css') }}" rel="stylesheet"/>
 		{% endblock %}
 	</head>
 
