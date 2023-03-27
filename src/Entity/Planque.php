@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PlanqueRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -32,6 +34,14 @@ class Planque
     #[ORM\ManyToOne(inversedBy: 'planques')]
     #[Assert\NotNull(message:'Veulliez sélectionner un pays')]
     private ?Pays $pays = null;
+
+    #[ORM\OneToMany(mappedBy: 'planque', targetEntity: Mission::class)]
+    private Collection $missions;
+
+    public function __construct()
+    {
+        $this->missions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -82,6 +92,36 @@ class Planque
     public function setPays(?Pays $pays): self
     {
         $this->pays = $pays;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Mission>
+     */
+    public function getMissions(): Collection
+    {
+        return $this->missions;
+    }
+
+    public function addMission(Mission $mission): self
+    {
+        if (!$this->missions->contains($mission)) {
+            $this->missions->add($mission);
+            $mission->setPlanque($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMission(Mission $mission): self
+    {
+        if ($this->missions->removeElement($mission)) {
+            // set the owning side to null (unless already changed)
+            if ($mission->getPlanque() === $this) {
+                $mission->setPlanque(null);
+            }
+        }
 
         return $this;
     }

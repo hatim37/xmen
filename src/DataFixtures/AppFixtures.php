@@ -29,6 +29,8 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+
+        
         //Agents
         $xavier = new Agent;
         $xavier->setName('Xavier')

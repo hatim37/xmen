@@ -43,9 +43,13 @@ class Agent
     #[Assert\NotNull(message:'Veulliez sélectionner une spécialité')]
     private Collection $specialite;
 
+    #[ORM\ManyToMany(targetEntity: Mission::class, mappedBy: 'agent')]
+    private Collection $missions;
+
     public function __construct()
     {
         $this->specialite = new ArrayCollection();
+        $this->missions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -140,5 +144,32 @@ class Agent
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection<int, Mission>
+     */
+    public function getMissions(): Collection
+    {
+        return $this->missions;
+    }
+
+    public function addMission(Mission $mission): self
+    {
+        if (!$this->missions->contains($mission)) {
+            $this->missions->add($mission);
+            $mission->addAgent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMission(Mission $mission): self
+    {
+        if ($this->missions->removeElement($mission)) {
+            $mission->removeAgent($this);
+        }
+
+        return $this;
     }
 }

@@ -28,9 +28,13 @@ class Pays
     #[ORM\OneToMany(mappedBy: 'pays', targetEntity: Planque::class)]
     private Collection $planques;
 
+    #[ORM\OneToMany(mappedBy: 'pays', targetEntity: Mission::class)]
+    private Collection $missions;
+
     public function __construct()
     {
         $this->planques = new ArrayCollection();
+        $this->missions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -90,5 +94,40 @@ class Pays
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Mission>
+     */
+    public function getMissions(): Collection
+    {
+        return $this->missions;
+    }
+
+    public function addMission(Mission $mission): self
+    {
+        if (!$this->missions->contains($mission)) {
+            $this->missions->add($mission);
+            $mission->setPays($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMission(Mission $mission): self
+    {
+        if ($this->missions->removeElement($mission)) {
+            // set the owning side to null (unless already changed)
+            if ($mission->getPays() === $this) {
+                $mission->setPays(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

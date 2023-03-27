@@ -29,8 +29,8 @@
 						<div class="card-body">
 							<h5 class="card-title"> Nom : {{ agent.name }}
 								{{ agent.firstname }}</h5>
-							<p class="card-text">Né le : {{ agent.dateOfBirth | date('d-m-Y') }}</p>
-							<p class="card-text">Nationalité : <span class="badge bg-primary">{{ agent.nationalite }}</span></p>
+							<p class="card-text">Né le : {{ agent.dateOfBirth | date('j/m/a') }}</p>
+							<p class="card-text">Nationalité :  <span class="badge bg-primary">{{ agent.nationalite }}</span></p>
 							<p class="card-text">Spécialité : {% for specialite in agent.specialite %}
 																	<span class="badge bg-primary">{{ specialite.name }}</span>
 																{% endfor %}
