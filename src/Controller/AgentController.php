@@ -7,6 +7,7 @@ use App\Form\AgentType;
 use App\Repository\AgentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +25,7 @@ class AgentController extends AbstractController
      * @param Request $request
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/agent', name: 'agent.index', methods: ['GET'])]
     public function index(AgentRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
@@ -45,11 +47,12 @@ class AgentController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/agent/nouveau', name: 'agent.new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $agent = new Agent();
-        $form = $this->createForm(AgentType::class, $agent);
+        $form = $this->createForm(AgentType::class, $agent,['labelButton' => 'Créer un agent']);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -78,6 +81,7 @@ class AgentController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/agent/edition/{id}', name: 'agent.edit', methods: ['GET', 'POST'])]
     public function edit(Agent $agent, Request $request, EntityManagerInterface $manager): Response
     {
@@ -113,6 +117,7 @@ class AgentController extends AbstractController
      * @param Agent $agent
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/agent/suppression/{id}', name: 'agent.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Agent $agent): Response
     {

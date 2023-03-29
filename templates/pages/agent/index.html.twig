@@ -24,18 +24,12 @@
 			{% for agent in agent %}
 				<div class="col">
 					<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-						<div class="card-header">Code : {{ agent.identificationCode }}</div>
-						<img class="card-img-top" src="..." alt="Card image cap">
+						<div class="card-header">Code : <span class="text-white">{{ agent.identificationCode }}</span></div>
 						<div class="card-body">
-							<h5 class="card-title"> Nom : {{ agent.name }}
-								{{ agent.firstname }}</h5>
-							<p class="card-text">Né le : {{ agent.dateOfBirth | date('j/m/a') }}</p>
-							<p class="card-text">Nationalité :  <span class="badge bg-primary">{{ agent.nationalite }}</span></p>
-							<p class="card-text">Spécialité : {% for specialite in agent.specialite %}
-																	<span class="badge bg-primary">{{ specialite.name }}</span>
-																{% endfor %}
-							</p>
-
+							<h5 class="card-title text-muted"> Nom : <span class="text-white">{{ agent.name }} {{ agent.firstname }}</span></h5>
+							<p class="card-text text-muted">Né le : <span class=" text-white">{{ agent.dateOfBirth | date('j/m/Y') }}</span></p>
+							<p class="card-text text-muted">Nationalité :  <span class="text-white">{{ agent.nationalite }}</span></p>
+							<p class="card-text text-muted">Spécialité : {% for specialite in agent.specialite %}<span class="text-white">{{ specialite.name }}</span>{% endfor %}</p>
 						</div>
 				
 						<div class= "d-flex justify-content-evenly m-4">

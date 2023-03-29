@@ -7,6 +7,7 @@ use App\Form\PlanqueType;
 use App\Repository\PlanqueRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,7 @@ class PlanqueController extends AbstractController
      * @param Request $request
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/planque', name: 'planque.index', methods: ['GET'])]
     public function index( PlanqueRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
@@ -46,11 +48,12 @@ class PlanqueController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/planque/nouveau', name: 'planque.new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $planque = new Planque();
-        $form = $this->createForm(PlanqueType::class, $planque);
+        $form = $this->createForm(PlanqueType::class, $planque,['labelButton' => 'Créer une mission']);
 
         $form->handleRequest($request);
         
@@ -80,6 +83,7 @@ class PlanqueController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/planque/edition/{id}', name: 'planque.edit', methods: ['GET', 'POST'])]
     public function edit(Planque $planque, Request $request, EntityManagerInterface $manager): Response
     {
@@ -114,6 +118,7 @@ class PlanqueController extends AbstractController
      * @param planque $planque
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/planque/suppression/{id}', name: 'planque.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, planque $planque): Response
     {

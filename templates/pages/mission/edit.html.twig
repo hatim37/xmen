@@ -6,112 +6,130 @@
     <div class="container ">
 
         <h1 class="mt-4">Modification d'une missions</h1>
-        <div class="row g-3" id="modal" >
-            {{ form_start(form) }}
+        <div class="row g-3 ">
+			{{ form_start(form) }}
+			<div class="colonne">
+				<div class="col-md-6">
 
-                <div class="form-group col-md-6">
-                    {{ form_label(form.pays) }}
-                    {{ form_widget(form.pays) }}
-                    <div class="form-error">
-                    {{ form_errors(form.pays) }}
-                    </div>
-                </div>
+					<div class="form-group col-md-10">
+						{{ form_label(form.pays) }}
+						{{ form_widget(form.pays) }}
+						<div class="form-error">
+							{{ form_errors(form.pays) }}
+						</div>
+					</div>
 
-                <div class="form-group col-md-6">
-                    {{ form_label(form.cible) }}
-                    {{ form_widget(form.cible) }}
-                    <div class="form-error">
-                    {{ form_errors(form.cible) }}
-                    </div>
-                </div>
+					<div class="form-group col-md-10">
+						{{ form_label(form.cible) }}
+						{{ form_widget(form.cible) }}
+						<div class="form-error">
+							{{ form_errors(form.cible) }}
+						</div>
+					</div>
 
-                <div class="form-group col-md-6">
-                    {{ form_label(form.title) }}
-                    {{ form_widget(form.title) }}
-                    <div class="form-error">
-                    {{ form_errors(form.title) }}
-                    </div>
-                </div>
+					<div class="form-group col-md-10">
+						{{ form_label(form.typeMission) }}
+						{{ form_widget(form.typeMission) }}
+						<div class="form-error">
+							{{ form_errors(form.typeMission) }}
+						</div>
+					</div>
 
-                <div class="form-group col-md-6">
-                    {{ form_label(form.codeName) }}
-                    {{ form_widget(form.codeName) }}
-                    <div class="form-error">
-                    {{ form_errors(form.codeName) }}
-                    </div>
-                </div>
+					<div class="form-group col-md-10">
+						{{ form_label(form.specialite) }}
+						{{ form_widget(form.specialite) }}
+						<div class="form-error">
+							{{ form_errors(form.specialite) }}
+						</div>
+					</div>
 
-                <div class="form-group col-md-6">
-                    {{ form_label(form.description) }}
-                    {{ form_widget(form.description) }}
-                    <div class="form-error">
-                    {{ form_errors(form.description) }}
-                    </div>
-                </div>
+					<div class="form-group col-md-10">
+						{{ form_label(form.title) }}
+						{{ form_widget(form.title) }}
+						<div class="form-error">
+							{{ form_errors(form.title) }}
+						</div>
+					</div>
 
-                <div class="form-group col-md-6">
-                    {{ form_label(form.dateStart) }}
-                    {{ form_widget(form.dateStart) }}
-                    <div class="form-error">
-                    {{ form_errors(form.dateStart) }}
-                    </div>
-                </div>
+					<div class="form-group col-md-10">
+						{{ form_label(form.codeName) }}
+						{{ form_widget(form.codeName) }}
+						<div class="form-error">
+							{{ form_errors(form.codeName) }}
+						</div>
+					</div>
 
-                <div class="form-group col-md-6">
-                    {{ form_label(form.dateEnd) }}
-                    {{ form_widget(form.dateEnd) }}
-                    <div class="form-error">
-                    {{ form_errors(form.dateEnd) }}
-                    </div>
-                </div>
+					<div class="form-group col-md-10">
+						{{ form_label(form.description) }}
+						{{ form_widget(form.description) }}
+						<div class="form-error">
+							{{ form_errors(form.description) }}
+						</div>
+					</div>
 
-                <div class="form-group col-md-6">
-                    {{ form_label(form.typeMission) }}
-                    {{ form_widget(form.typeMission) }}
-                    <div class="form-error">
-                    {{ form_errors(form.typeMission) }}
-                    </div>
-                </div>
 
-                <div class="form-group col-md-6">
-                    {{ form_label(form.specialite) }}
-                    {{ form_widget(form.specialite) }}
-                    <div class="form-error">
-                    {{ form_errors(form.specialite) }}
-                    </div>
-                </div>
+				</div>
+				<div class="col-md-6">
 
-                <div class="form-group col-md-6">
-                    {{ form_label(form.agent) }}
-                    {{ form_widget(form.agent) }}
-                    <div class="form-error">
-                    {{ form_errors(form.agent) }}
-                    </div>
-                </div>
+					<div class="form-group col-md-10">
+						{{ form_label(form.dateStart) }}
+						{{ form_widget(form.dateStart) }}
+						<div class="form-error">
+							{{ form_errors(form.dateStart) }}
+						</div>
+					</div>
 
-                <div class="form-group col-md-6">
-                    {{ form_label(form.contact) }}
-                    {{ form_widget(form.contact) }}
-                    <div class="form-error">
-                    {{ form_errors(form.contact) }}
-                    </div>
-                </div>
+					<div class="form-group col-md-10">
+						{{ form_label(form.dateEnd) }}
+						{{ form_widget(form.dateEnd) }}
+						<div class="form-error">
+							{{ form_errors(form.dateEnd) }}
+						</div>
+					</div>
 
-                <div class="form-group col-md-6">
-                    {{ form_label(form.planque) }}
-                    {{ form_widget(form.planque) }}
-                    <div class="form-error">
-                    {{ form_errors(form.planque) }}
-                    </div>
-                </div>
 
-                <div class="form-group col-md-6">
-                    {{ form_label(form.statut) }}
-                    {{ form_widget(form.statut) }}
-                    <div class="form-error">
-                    {{ form_errors(form.statut) }}
-                    </div>
-                </div>
-            {{ form_rest(form) }}
-        </div>
+					<div class="form-group col-md-10">
+						{{ form_label(form.agent) }}
+						{{ form_widget(form.agent) }}
+						<div class="form-error">
+							{{ form_errors(form.agent) }}
+						</div>
+					</div>
+
+					<div class="form-group col-md-10">
+						{{ form_label(form.contact) }}
+						{{ form_widget(form.contact) }}
+						<div class="form-error">
+							{{ form_errors(form.contact) }}
+						</div>
+					</div>
+
+					<div class="form-group col-md-10">
+						{{ form_label(form.planque) }}
+						{{ form_widget(form.planque) }}
+						<div class="form-error">
+							{{ form_errors(form.planque) }}
+						</div>
+					</div>
+
+					<div class="form-group col-md-10">
+						{{ form_label(form.statut) }}
+						{{ form_widget(form.statut) }}
+						<div class="form-error">
+							{{ form_errors(form.statut) }}
+						</div>
+					</div>
+
+					<div class="form-group">
+						{{ form_label(form.submit) }}
+						{{ form_widget(form.submit) }}
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		{{ form_rest(form) }}
+	</div>
 {% endblock %}

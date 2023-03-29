@@ -111,7 +111,7 @@ class AgentType extends AbstractType
             'attr' => [
                 'class' => 'btn btn-primary mt-4',
             ],
-            'label' => 'Créer un agent'
+            'label' => $options['labelButton'],
             
             ]);
     }
@@ -120,6 +120,7 @@ class AgentType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Agent::class,
+            'labelButton' => 'Valider',
         ]);
     }
 }

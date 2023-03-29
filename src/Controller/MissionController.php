@@ -7,10 +7,12 @@ use App\Form\MissionType;
 use App\Repository\MissionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class MissionController extends AbstractController
 {
@@ -43,12 +45,13 @@ class MissionController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/mission/nouveau', name: 'mission.new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
        
         $mission = new Mission();
-        $form = $this->createForm(MissionType::class, $mission);
+        $form = $this->createForm(MissionType::class, $mission,['labelButton' => 'Créer une mission']);
 
         
         $form->handleRequest($request);
@@ -63,7 +66,7 @@ class MissionController extends AbstractController
                'Votre mission a été créé avec succès !'       
            );
 
-           return $this->redirectToRoute('mission.index');
+           return $this->redirectToRoute('home.index');
         }
 
         return $this->render('pages/mission/new.html.twig', [
@@ -80,6 +83,7 @@ class MissionController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/mission/edition/{id}', name: 'mission.edit', methods: ['GET', 'POST'])]
     public function edit(Mission $mission, Request $request, EntityManagerInterface $manager): Response
     {
@@ -98,7 +102,7 @@ class MissionController extends AbstractController
                'Votre mission a été modifié avec succès !'
            );
 
-           return $this->redirectToRoute('mission.index');
+           return $this->redirectToRoute('home.index');
         }
 
         return $this->render('pages/mission/edit.html.twig', [
@@ -116,6 +120,7 @@ class MissionController extends AbstractController
      * @param mission $mission
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/mission/suppression/{id}', name: 'mission.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Mission $mission): Response
     {
@@ -126,20 +131,20 @@ class MissionController extends AbstractController
         'Votre mission a été supprimé avec succès !'
     );
 
-    return $this->redirectToRoute('mission.index');
+    return $this->redirectToRoute('home.index');
 
     }
 
     #[Route('/mission/{id}', name: 'mission.show', methods: ['GET'])]
-    public function show(MissionRepository $repository, PaginatorInterface $paginator, Request $request): Response
+    public function show(MissionRepository $repository, PaginatorInterface $paginator, Request $request, Mission $mission): Response
     {
-            $mission = $paginator->paginate(
-            $repository->findAll(), /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            6 /*limit per page*/
-        );
+       //     $mission = $paginator->paginate(
+       //     $repository->findAll(), /* query NOT result */
+       //     $request->query->getInt('page', 1), /*page number*/
+       //     6 /*limit per page*/
+       // );
 
-        return $this->render('pages/mission/index.html.twig', [
+        return $this->render('pages/mission/show.html.twig', [
             'mission' => $mission,
         ]);
     }

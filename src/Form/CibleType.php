@@ -81,7 +81,7 @@ class CibleType extends AbstractType
             'attr' => [
                 'class' => 'btn btn-primary mt-4',
             ],
-            'label' => 'Créer une cible'
+            'label' => $options['labelButton'],
             ]);
     }
 
@@ -89,6 +89,7 @@ class CibleType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Cible::class,
+            'labelButton' => 'Valider',
         ]);
     }
 }

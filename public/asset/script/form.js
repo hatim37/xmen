@@ -8,15 +8,12 @@ $(document).ready(function() {
     let $form = $field.closest('form')
     let data = {}
     data[$field.attr('name')] = $field.val()
-    alert('click')
-    
+
     $.post($form.attr('action'), data).then(function (data) {
           
        let $input = $(data).find('#mission_agent')
         
        $('#mission_agent').replaceWith($input)
-       alert('remplacement')
-     
        $('.select2').select2();
     })
    });
@@ -26,15 +23,13 @@ $(document).ready(function() {
     let $form = $field.closest('form')
     let data = {}
     data[$field.attr('name')] = $field.val()
-    alert('click')
-    
+   
     $.post($form.attr('action'), data).then(function (data) {
           
        let $input = $(data).find('#mission_agent')
         
        $('#mission_agent').replaceWith($input)
-       alert('remplacement')
-     
+       
        $('.select2').select2();
     })
    });
@@ -44,7 +39,6 @@ $(document).ready(function() {
     let $form = $field.closest('form')
     let data = {}
     data[$field.attr('name')] = $field.val()
-    alert('click')
     
     $.post($form.attr('action'), data).then(function (data) {
           
@@ -53,14 +47,7 @@ $(document).ready(function() {
         
        $('#mission_contact').replaceWith($input)
        $('#mission_planque').replaceWith($input2)
-       alert('remplacement')
-     
+      
        $('.select2').select2();
     })
    });
- 
- 
-
- 
- 
-  

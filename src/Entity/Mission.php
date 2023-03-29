@@ -25,7 +25,7 @@ class Mission
 
     #[ORM\ManyToMany(targetEntity: Cible::class, inversedBy: 'missions')]
     #[Assert\NotBlank(message:'Veulliez sélectionner une cible')]
-    private Collection $cible;
+    private ?Collection $cible = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:'Veulliez renseigner un titre')]
@@ -57,14 +57,14 @@ class Mission
 
     #[ORM\ManyToMany(targetEntity: Agent::class, inversedBy: 'missions')]
     #[Assert\NotBlank(message:'Veulliez sélectonner un agent')]
-    private Collection $agent;
+    private ?Collection $agent = null;
 
     #[ORM\ManyToMany(targetEntity: Contact::class, inversedBy: 'missions')]
     #[Assert\NotBlank(message:'Veulliez sélectonner un contact')]
-    private Collection $contact;
+    private ?Collection $contact = null;
 
     #[ORM\ManyToOne(inversedBy: 'missions')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Planque $planque = null;
 
     #[ORM\ManyToOne(inversedBy: 'missions')]

@@ -30,7 +30,7 @@ class SpecialiteType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary mt-4',
                 ],
-                'label' => 'Créer une spécialité'
+                'label' => $options['labelButton'],
                 ]);
     }
 
@@ -38,6 +38,7 @@ class SpecialiteType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Specialite::class,
+            'labelButton' => 'Valider',
         ]);
     }
 }

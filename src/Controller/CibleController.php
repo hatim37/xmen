@@ -7,6 +7,7 @@ use App\Form\CibleType;
 use App\Repository\CibleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,7 @@ class CibleController extends AbstractController
      * @param Request $request
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/cible', name: 'cible.index', methods: ['GET'])]
     public function index(CibleRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
@@ -43,11 +45,12 @@ class CibleController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/cible/nouveau', name: 'cible.new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $cible = new Cible();
-        $form = $this->createForm(CibleType::class, $cible);
+        $form = $this->createForm(CibleType::class, $cible,['labelButton' => 'Créer une cible']);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -76,6 +79,7 @@ class CibleController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/cible/edition/{id}', name: 'cible.edit', methods: ['GET', 'POST'])]
     public function edit(Cible $cible, Request $request, EntityManagerInterface $manager): Response
     {
@@ -109,6 +113,7 @@ class CibleController extends AbstractController
      * @param Cible $cible
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/cible/suppression/{id}', name: 'cible.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Cible $cible): Response
     {

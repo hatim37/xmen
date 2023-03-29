@@ -1,29 +1,87 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} - Accueil{% endblock %}
+{% block title %}
+	{{ parent() }}- les missions
+{% endblock %}
 
 
 {% block body %}
-	<div class="container mt-5">
+	<div class="container mt-5 body-image">
 		<div class="jumbotron">
 			<h1 class="display-4 tt">Bienvenue chez les X-Men</h1>
 			<p class="lead">La fondation X-Men une application qui va te permettre de retrouver tous nos super-héros sur le terrain</p>
 			<hr class="my-4">
+		</div>
 
-			<div class="list-group">
-                <p class="lead">Consulter nos missions :</p>
-				<a href="#" class="list-group-item list-group-item-action active">Cras justo odio</a>
-				<a href="#" class="list-group-item list-group-item-action mt-2">Dapibus ac facilisis in</a>
-				<a href="#" class="list-group-item list-group-item-action mt-2">Dapibus ac facilisis in</a>
-                <a href="#" class="list-group-item list-group-item-action mt-2">Dapibus ac facilisis in</a>
-                <a href="#" class="list-group-item list-group-item-action mt-2">Dapibus ac facilisis in</a>
-                <a href="#" class="list-group-item list-group-item-action mt-2">Dapibus ac facilisis in</a>
-                <a href="#" class="list-group-item list-group-item-action mt-2">Dapibus ac facilisis in</a>
-                <a href="#" class="list-group-item list-group-item-action mt-2">Dapibus ac facilisis in</a>
-                <a href="#" class="list-group-item list-group-item-action mt-2">Dapibus ac facilisis in</a>
+		
+		{% if not mission.items is same as ([]) %}
+
+
+			{% if app.user %}
+				<a href="{{ path('mission.new') }}" class="btn btn-primary">Créer une mission</a>
+			{% endif %}
+
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success mt-3">
+					{{ message }}</div>
+			{% endfor %}
+
+			<div class="count mt-4">
+				<h4>Il y a
+					{{ mission.getTotalItemCount }}
+					missions au total</h4>
 			</div>
 
-			
-		</div>
+			<div class="table-responsive">
+				<table class="table table-hover table-striped mt-4 table-texte-size">
+					<thead>
+						<tr>
+							<th scope="col" class="numero">Numéro</th>
+							<th scope="col" class="nom">Nom</th>
+							<th scope="col" class="nomDeCode">Nom de code</th>
+							<th scope="col" class="pays">Pays</th>
+							<th scope="col" class="statut">Statut</th>
+							<th scope="col" class="consulter">Consulter</th>
+							{% if app.user %}
+								<th scope="col" class="edition">Edition</th>
+								<th scope="col" class="suppression">Suppression</th>
+							{% endif %}
+						</tr>
+					</thead>
+					<tbody>
+						{% for missions in mission %}
+							<tr class="table-active mt-4">
+								<th scope="row" class="numero">Mission :
+									{{ missions.id }}</th>
+								<td class="nom">{{ missions.title }}</td>
+								<td class="nomDeCode">{{ missions.codeName }}</td>
+								<td class="pays">{{ missions.pays }}</td>
+								<td class="statut">{{ missions.statut }}</td>
+								<td class="consulter">
+									<a href="{{ path('mission.show', { id: missions.id }) }}" class="btn btn-success btn-size">Détail</a>
+								</td>
+								{% if app.user %}
+									<td class="editer">
+										<a href="{{ path('mission.edit', { id: missions.id }) }}" class="btn btn-info btn-size">Modifier</a>
+									</td>
+									<td class="supprimer">
+										<a href="{{ path('mission.delete', { id: missions.id }) }}" class="btn btn-danger btn-size">Supprimer</a>
+									</td>
+								{% endif %}
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<div class="navigation d-flex justify-content-center mt-4">
+				{{ knp_pagination_render(mission) }}
+			</div>
+		{% else %}
+			<h4>Aucune mission n'a été trouvé</h4>
+			{% if app.user %}
+				<a href="{{ path('mission.new') }}" class="btn btn-primary">Créer une mission</a>
+			{% endif %}
+		{% endif %}
+
 	</div>
 {% endblock %}

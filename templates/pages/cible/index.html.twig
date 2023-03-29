@@ -23,13 +23,11 @@
 			{% for cible in cible %}
 				<div class="col">
 					<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-						<div class="card-header">Nom de Code : {{ cible.codeName }}</div>
-						<img class="card-img-top" src="..." alt="Card image cap">
+						<div class="card-header">Nom de code : <span class="text-white">{{ cible.codeName }}</span></div>
 						<div class="card-body">
-							<h5 class="card-title"> Nom : {{ cible.name }}
-								{{ cible.firstname }}</h5>
-							<p class="card-text">Né le : {{ cible.dateOfBirth | date('d/m/Y') }}</p>
-							<p class="card-text">Nom de code : {{ cible.codeName }}</p>
+							<h5 class="card-title text-muted"> Nom : <span class="text-white">{{ cible.name }} {{ cible.firstname }}</span></h5>
+							<p class="card-text text-muted">Né le : <span class=" text-white">{{ cible.dateOfBirth | date('j/m/Y') }}</span></p>
+							<p class="card-text text-muted">Nationalité :  <span class="text-white">{{ cible.nationalite }}</span></p>
 						</div>
 						<div class= "d-flex justify-content-evenly m-4">
 							<a href="{{ path('cible.edit', { id: cible.id }) }}" class="btn btn-info">Modifier</a>

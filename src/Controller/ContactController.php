@@ -7,6 +7,7 @@ use App\Form\ContactType;
 use App\Repository\ContactRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,7 @@ class ContactController extends AbstractController
      * @param Request $request
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/contact', name: 'contact.index', methods: ['GET'])]
     public function index(ContactRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
@@ -43,11 +45,12 @@ class ContactController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/contact/nouveau', name: 'contact.new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $contact = new Contact();
-        $form = $this->createForm(ContactType::class, $contact);
+        $form = $this->createForm(ContactType::class, $contact,['labelButton' => 'Créer un contact']);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -76,6 +79,7 @@ class ContactController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/contact/edition/{id}', name: 'contact.edit', methods: ['GET', 'POST'])]
     public function edit(Contact $contact, Request $request, EntityManagerInterface $manager): Response
     {
@@ -109,6 +113,7 @@ class ContactController extends AbstractController
      * @param Contact $contact
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/contact/suppression/{id}', name: 'contact.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Contact $contact): Response
     {

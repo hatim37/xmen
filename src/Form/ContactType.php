@@ -74,7 +74,7 @@ class ContactType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary mt-4',
                 ],
-                'label' => 'Créer un contact'
+                'label' => $options['labelButton'],
                 ]);
     }
 
@@ -82,6 +82,7 @@ class ContactType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Contact::class,
+            'labelButton' => 'Valider',
         ]);
     }
 }

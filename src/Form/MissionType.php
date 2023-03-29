@@ -225,12 +225,13 @@ class MissionType extends AbstractType
                     'attr' => [
                         'class' => 'select2 select-choice mt-4'
                     ],
-                    'label' => 'Les planques',
+                    'label' => 'La planque',
                     'label_attr' => [
                         'class' => 'form-label mt-4'
                     ],
                     'choice_label' => 'type',
-                    'placeholder' => 'selectionner une planque'
+                    'placeholder' => 'selectionner une planque',
+                    'required'=> false
                 ])
             ->add('statut', EntityType::class, [
                     'class' => Statut::class,
@@ -241,7 +242,7 @@ class MissionType extends AbstractType
                     'attr' => [
                         'class' => 'select2 select-choice mt-4'
                     ],
-                    'label' => 'statut',
+                    'label' => 'statut de la mission',
                     'label_attr' => [
                         'class' => 'form-label mt-4'
                     ],
@@ -251,9 +252,9 @@ class MissionType extends AbstractType
                 ])
             ->add('submit', SubmitType::class, [
                     'attr' => [
-                        'class' => 'btn btn-primary mt-4',
+                        'class' => 'btn btn-primary mt-5',
                     ],
-                    'label' => 'Créer une mission' 
+                    'label' => $options['labelButton'],
                 ]);
 
 
@@ -356,13 +357,13 @@ class MissionType extends AbstractType
                 'attr' => [
                     'class' => 'select2 select-choice mt-4'
                 ],
-                'label' => 'Les planques',
+                'label' => 'La planque',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
                 'choice_label' => 'type',
-                'placeholder' => 'selectionner une planque', 
-                'required'=> true
+                'placeholder' => 'selectionner une planque',
+                'required' => false
             ]);
     }
 
@@ -406,7 +407,7 @@ class MissionType extends AbstractType
             'attr' => [
                 'class' => 'select2 mt4'
             ],
-            'label' => 'Les agents (sélectionnez au moins 1 agent avec la sépcialité requise proposer dans la liste supérieur)',
+            'label' => 'Les agents : sélectionnez au moins 1 agent avec la sépcialité requise en haut de la liste',
             'label_attr' => [
                 'class' => 'form-label mt-4'
             ],
@@ -445,6 +446,7 @@ class MissionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Mission::class,
+            'labelButton' => 'Valider',
         ]);
     }
 }

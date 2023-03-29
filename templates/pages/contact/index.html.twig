@@ -23,12 +23,11 @@
 			{% for contact in contact %}
 				<div class="col">
 					<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-						<div class="card-header">Code : {{ contact.codeName }}</div>
-						<img class="card-img-top" src="..." alt="Card image cap">
+						<div class="card-header">Nom de code : <span class="text-white">{{ contact.codeName }}</span></div>
 						<div class="card-body">
-							<h5 class="card-title">{{ contact.name }}
-								{{ contact.firstname }}</h5>
-							<p class="card-text">Date de naisance :{{ contact.dateOfBirth | date('d/m/Y') }}</p>
+							<h5 class="card-title text-muted"> Nom : <span class="text-white">{{ contact.name }} {{ contact.firstname }}</span></h5>
+							<p class="card-text text-muted">Né le : <span class=" text-white">{{ contact.dateOfBirth | date('j/m/Y') }}</span></p>
+							<p class="card-text text-muted">Nationalité :  <span class="text-white">{{ contact.nationalite }}</span></p>
 						</div>
 						<div class= "d-flex justify-content-evenly m-4">
 							<a href="{{ path('contact.edit', { id: contact.id }) }}" class="btn btn-info">Modifier</a>

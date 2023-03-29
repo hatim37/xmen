@@ -7,6 +7,7 @@ use App\Form\SpecialiteType;
 use App\Repository\SpecialiteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,7 @@ class SpecialiteController extends AbstractController
      * @param Request $request
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/specialite', name: 'specialite.index', methods: ['GET'])]
     public function index(SpecialiteRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
@@ -43,11 +45,12 @@ class SpecialiteController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/specialite/nouveau', name: 'specialite.new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $specialite = new Specialite();
-        $form = $this->createForm(SpecialiteType::class, $specialite);
+        $form = $this->createForm(SpecialiteType::class, $specialite,['labelButton' => 'Créer une spécialité']);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -76,6 +79,7 @@ class SpecialiteController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/specialite/edition/{id}', name: 'specialite.edit', methods: ['GET', 'POST'])]
     public function edit(Specialite $specialite, Request $request, EntityManagerInterface $manager): Response
     {
@@ -111,6 +115,7 @@ class SpecialiteController extends AbstractController
      * @param specialite $specialite
      * @return Response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/specialite/suppression/{id}', name: 'specialite.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Specialite $specialite): Response
     {

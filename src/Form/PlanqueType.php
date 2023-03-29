@@ -65,7 +65,7 @@ class PlanqueType extends AbstractType
             'attr' => [
                 'class' => 'btn btn-primary mt-4',
             ],
-            'label' => 'Créer une planque'
+            'label' => $options['labelButton'],
             
             ]);
     }
@@ -74,6 +74,7 @@ class PlanqueType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Planque::class,
+            'labelButton' => 'Valider',
         ]);
     }
 }

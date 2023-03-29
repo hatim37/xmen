@@ -1,0 +1,251 @@
+:root {
+
+  --bs-body-bg: #0e1316;
+}
+
+body {
+  
+  background: url(../asset/images/fond-body.jpg);
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-color: var(--bs-body-bg);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+  font-size: 1rem;
+
+}
+/*
+*
+** ......../ detail-mission /.......... *
+*
+*/
+
+.mission_detail_titre {
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-card-btn{
+display: flex;
+}
+
+.menu-card a {
+  font-size: 13px;
+  padding: 6px;
+}
+
+.menu-card-btn a {
+  margin: 0px 10px;
+}
+
+
+.list-group-item, .card {
+  border: 1px solid var(--bs-blue);
+}
+
+.description {
+  border-top: 1px solid var(--bs-blue);
+}
+
+.text-white {
+
+  margin: 0px 5px;
+}
+
+
+.table-texte-size {
+  font-size: 0.65rem;
+}
+
+.texte-size-show {
+  font-size: 0.8rem;
+}
+
+
+.btn-size {
+  font-size: 9px;
+  padding: 6px;
+}
+
+.btn-size-new {
+  font-size: 11px;
+  padding: 6px;
+}
+
+.menu-card {
+  display: flex;
+  justify-content: space-between;
+ 
+}
+
+.mission_image {
+max-height: 200px;
+width: 100%;
+
+}
+
+.card-header {
+  font-size: 1rem;
+  display: block;
+}
+
+/* ......../ media query /.......... */
+@media screen and (min-width: 768px) {
+  
+  .card-header {
+    font-size: calc(1.275rem + .3vw);
+    display: flex;
+  }
+  .table-texte-size {
+    font-size: 1rem;
+  }
+
+  .btn-size, .btn-size-new {
+    font-size: 1rem; 
+  }
+
+  .texte-size-show {
+    font-size: 1rem;
+  }
+}
+
+
+
+/*
+*
+** ......../ home-page /.......... *
+*
+*/
+
+.lead {
+  font-size: 0.9rem;
+}
+
+.display-4 {
+  font-size: calc(1.425rem + 2.1vw);
+}
+
+.count h4 {
+  font-size: 1rem;
+}
+
+
+@media screen and (min-width: 768px) {
+  .display-4 {
+    font-size: calc(1.475rem + 2.7vw);
+  }  
+
+  .lead {
+    font-size: 1.25rem;
+  }
+
+  .count h4 {
+    font-size: calc(1.275rem + .3vw)
+  }
+  
+}
+
+
+@media screen and (max-width: 768px) {
+  
+  .nom, .pays, .statut {
+    display: none; 
+  
+  }
+  
+}
+
+
+/*
+*
+** ......../ formulaire-new.mission /.......... *
+*
+*/
+
+.colonne {
+  display: block;
+
+}
+
+@media screen and (min-width: 768px) {
+  
+  .colonne {
+    display: flex;
+  
+  }
+  
+}
+
+
+
+/*
+*
+** ......../ Footer /.......... *
+*
+*/
+
+
+
+
+.footer {
+  
+    background-color: var(--bs-body-bg);
+    color:white;
+    border: none;
+    border-top: 1px solid var(--bs-blue);
+    font-size: 0.7rem;
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 20px;
+    width: 100%; 
+    bottom: 0; left: 0; right: 0;
+    max-height: 50px;
+  }
+
+  footer a {
+    color : white;
+  }
+
+  footer a:hover {
+    color : var(--bs-blue);
+  }
+
+
+
+  .footer__made a{
+    margin-left: 10px;
+  }
+  
+  /* ......../ media query /.......... */
+  @media screen and (min-width: 768px) {
+  
+    .footer {
+      font-size: 15px;
+      max-height: 50px;
+    }
+
+    body {
+      font-size: 1rem;
+    
+    }
+  }
+  
+/*
+*
+** ......../ Selecteur-champ-formulaire /.......... *
+*
+*/
+.select2-results__options {
+
+  color: black;
+}
+
+.select2 {
+
+  color: black;
+}
+
+
+

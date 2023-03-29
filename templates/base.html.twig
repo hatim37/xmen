@@ -9,12 +9,13 @@
 		<title>
 			{% block title %}X-Men{% endblock %}
 		</title>
-		<link rel="icon" type="image/png" href="{{ asset('/assets/images/icon.png') }}"/>
+		<link rel="icon" type="image/png" href="{{ asset('/asset/images/icon.png') }}"/>
 		{% block stylesheets %}
+			
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/darkly/bootstrap.min.css">
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/darkly/_variables.scss">
 			<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-			<link href="{{ asset('/assets/styles.css') }}" rel="stylesheet"/>
+			<link href="{{ asset('/asset/styles.css') }}" rel="stylesheet"/>
 		{% endblock %}
 	</head>
 
@@ -36,6 +37,7 @@
 			
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 			<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-			<script src="{{ asset('assets/script.js') }}"></script>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+			<script src="{{ asset('/asset/script/form.js') }}"></script>
 		{% endblock %}
 </html>
