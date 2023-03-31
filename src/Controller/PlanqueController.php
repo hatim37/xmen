@@ -99,7 +99,7 @@ class PlanqueController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre planque a été modifié avec succès !'
+                'Votre planque a été modifiée avec succès !'
             );
 
             return $this->redirectToRoute('planque.index');
@@ -126,7 +126,7 @@ class PlanqueController extends AbstractController
        $manager->flush();
        $this->addFlash(
         'success',
-        'Votre planque a été supprimé avec succès !'
+        'Votre planque a été supprimée avec succès !'
     );
 
     return $this->redirectToRoute('planque.index');

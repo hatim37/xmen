@@ -63,7 +63,7 @@ class AgentController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre agent a été créer avec succès !'       
+                'Votre agent a été crée avec succès !'       
             );
 
             return $this->redirectToRoute('agent.index');

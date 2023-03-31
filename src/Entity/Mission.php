@@ -47,7 +47,7 @@ class Mission
     #[Assert\NotBlank(message:'Veulliez renseigner une date de fin')]
     private ?\DateTimeInterface $dateEnd = null;
 
-    #[ORM\ManyToOne(inversedBy: 'missions')]
+    #[ORM\ManyToOne(inversedBy: 'missions', cascade: ['persist'])]
     #[Assert\NotBlank(message:'Veulliez sélectonner un type de mission')]
     private ?TypeMission $typeMission = null;
 
@@ -67,7 +67,7 @@ class Mission
     #[ORM\JoinColumn(nullable: true)]
     private ?Planque $planque = null;
 
-    #[ORM\ManyToOne(inversedBy: 'missions')]
+    #[ORM\ManyToOne(inversedBy: 'missions', cascade: ['persist'])]
     #[Assert\NotBlank(message:'Veulliez sélectonner un statut')]
     private ?Statut $statut = null;
 

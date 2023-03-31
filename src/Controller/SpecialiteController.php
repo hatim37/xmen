@@ -95,7 +95,7 @@ class SpecialiteController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre spécialité a été modifié avec succès !'
+                'Votre spécialité a été modifiée avec succès !'
             );
 
             return $this->redirectToRoute('specialite.index');
@@ -123,7 +123,7 @@ class SpecialiteController extends AbstractController
        $manager->flush();
        $this->addFlash(
         'success',
-        'Votre spécialité a été supprimé avec succès !'
+        'Votre spécialité a été supprimée avec succès !'
     );
 
     return $this->redirectToRoute('specialite.index');

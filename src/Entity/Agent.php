@@ -40,6 +40,7 @@ class Agent
     private ?Nationalite $nationalite = null;
 
     #[ORM\ManyToMany(targetEntity: Specialite::class, inversedBy: 'agents')]
+    #[ORM\JoinTable(name:'agent_specialite')]
     #[Assert\NotNull(message:'Veulliez sélectionner une spécialité')]
     private Collection $specialite;
 

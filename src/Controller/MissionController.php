@@ -33,7 +33,7 @@ class MissionController extends AbstractController
             6 /*limit per page*/
         );
 
-        return $this->render('pages/mission/index.html.twig', [
+        return $this->render('pages/home.html.twig', [
             'mission' => $mission,
         ]);
     }

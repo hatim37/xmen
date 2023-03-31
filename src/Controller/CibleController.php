@@ -95,7 +95,7 @@ class CibleController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre cible a été modifié avec succès !'
+                'Votre cible a été modifiée avec succès !'
             );
 
             return $this->redirectToRoute('cible.index');
@@ -121,7 +121,7 @@ class CibleController extends AbstractController
        $manager->flush();
        $this->addFlash(
         'success',
-        'Votre cible a été supprimé avec succès !'
+        'Votre cible a été supprimée avec succès !'
     );
 
     return $this->redirectToRoute('cible.index');
