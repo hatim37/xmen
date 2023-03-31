@@ -10,11 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class contactTest extends WebTestCase
 {
-    
     public function testIfCreateContactIsSuccessfull(): void
     {
-        
-
         $client = static::createClient();
 
         $urlGenerator = $client->getContainer()->get('router');
@@ -26,7 +23,7 @@ class contactTest extends WebTestCase
         $client->loginUser($user);
 
         $crawler = $client->request(Request::METHOD_GET, $urlGenerator->generate('contact.new'));
-        
+
         $form = $crawler->filter('form[name=contact]')->form([
             'contact[name]' => "NewContact",
             'contact[firstName]' => 'ContactName',
@@ -34,13 +31,13 @@ class contactTest extends WebTestCase
             'contact[codeName]' => "nom de code",
             'contact[nationalite]' => "3"
         ]);
-        
+
         $client->submit($form);
-        
+
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
         $client->followRedirect();
-       
+
         $this->assertSelectorTextContains('div.alert-success', 'Votre contact a été créé avec succès !');
 
         $this->assertRouteSame('contact.index');
@@ -74,7 +71,7 @@ class contactTest extends WebTestCase
 
         $user = $entityManager->find(User::class, 1);
         $contact = $entityManager->getRepository(Contact::class)->find(3);
-        
+
 
         $client->loginUser($user);
 
@@ -129,5 +126,4 @@ class contactTest extends WebTestCase
 
         $this->assertRouteSame('contact.index');
     }
-   
 }

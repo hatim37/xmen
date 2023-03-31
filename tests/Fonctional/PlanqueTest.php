@@ -10,11 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class planqueTest extends WebTestCase
 {
-    
     public function testIfCreateplanqueIsSuccessfull(): void
     {
-        
-
         $client = static::createClient();
 
         $urlGenerator = $client->getContainer()->get('router');
@@ -26,20 +23,20 @@ class planqueTest extends WebTestCase
         $client->loginUser($user);
 
         $crawler = $client->request(Request::METHOD_GET, $urlGenerator->generate('planque.new'));
-        
+
         $form = $crawler->filter('form[name=planque]')->form([
             'planque[pays]' => "3",
             'planque[code]' => '5555',
             'planque[address]' => "Adresse",
             'planque[type]' => "type"
         ]);
-        
+
         $client->submit($form);
-        
+
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
         $client->followRedirect();
-       
+
         $this->assertSelectorTextContains('div.alert-success', 'Votre planque a été créé avec succès !');
 
         $this->assertRouteSame('planque.index');
@@ -73,7 +70,7 @@ class planqueTest extends WebTestCase
 
         $user = $entityManager->find(User::class, 1);
         $planque = $entityManager->getRepository(Planque::class)->find(5);
-        
+
 
         $client->loginUser($user);
 
@@ -127,5 +124,4 @@ class planqueTest extends WebTestCase
 
         $this->assertRouteSame('planque.index');
     }
-   
 }

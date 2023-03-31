@@ -199,9 +199,8 @@ class Mission
 
     public function setSpecialite(Specialite $specialite): self
     {
-        
         $this->specialite = $specialite;
-        
+
 
         return $this;
     }

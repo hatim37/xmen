@@ -34,16 +34,15 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class MissionType extends AbstractType
 {
-
-
     private $agentRepository;
     private $contactRepository;
     private $planqueRepository;
 
-    public function __construct(AgentRepository $agentRepository, ContactRepository $contactRepository, PlanqueRepository $planqueRepository){
-         $this->agentRepository = $agentRepository;
-         $this->contactRepository = $contactRepository;
-         $this->planqueRepository = $planqueRepository;
+    public function __construct(AgentRepository $agentRepository, ContactRepository $contactRepository, PlanqueRepository $planqueRepository)
+    {
+        $this->agentRepository = $agentRepository;
+        $this->contactRepository = $contactRepository;
+        $this->planqueRepository = $planqueRepository;
     }
 
 
@@ -57,7 +56,7 @@ class MissionType extends AbstractType
                         'minlength' => '2',
                         'maxlength' => '255'
                     ],
-                    'label' => 'Titre de la mission', 
+                    'label' => 'Titre de la mission',
                     'required'=> true,
                     'label_attr' => [
                         'class' => 'form-label mt-4'
@@ -69,7 +68,7 @@ class MissionType extends AbstractType
                         'minlength' => '2',
                         'maxlength' => '255'
                     ],
-                    'label' => 'Nom de code', 
+                    'label' => 'Nom de code',
                     'required'=> true,
                     'label_attr' => [
                         'class' => 'form-label mt-4'
@@ -80,7 +79,7 @@ class MissionType extends AbstractType
                         'class' => 'form-control',
                     ],
                     'required'=> true,
-                    'label' => 'Description', 
+                    'label' => 'Description',
                     'label_attr' => [
                         'class' => 'form-label mt-4'
                     ]
@@ -90,30 +89,30 @@ class MissionType extends AbstractType
                     'attr' => [
                         'class' => 'form-control'
                     ],
-                    'label' => 'Date de début', 
+                    'label' => 'Date de début',
                     'required'=> true,
                     'by_reference' => true,
                     'label_attr' => [
                         'class' => 'form-label mt-4'
-                    ]  
+                    ]
                 ])
             ->add('dateEnd', DateType::class, [
                     'widget' => 'single_text',
                     'attr' => [
                         'class' => 'form-control'
                     ],
-                    'label' => 'Date de fin', 
+                    'label' => 'Date de fin',
                     'required'=> true,
                     'by_reference' => true,
                     'label_attr' => [
                         'class' => 'form-label mt-4'
-                    ]   
+                    ]
                     ])
             ->add('pays', EntityType::class, [
                     'class' => Pays::class,
                     'query_builder' => function (PaysRepository $r) {
-                        return $r->createQueryBuilder('p')                      
-                            ->orderBy('p.name', 'ASC');     
+                        return $r->createQueryBuilder('p')
+                            ->orderBy('p.name', 'ASC');
                     },
                     'attr' => [
                         'class' => 'select2 mt-4'
@@ -122,15 +121,15 @@ class MissionType extends AbstractType
                     'label_attr' => [
                         'class' => 'form-label mt-4'
                     ],
-                    'choice_label' => 'name', 
+                    'choice_label' => 'name',
                     'placeholder' => 'selectionner un pays',
                     'required'=> true,
                 ])
             ->add('cible', EntityType::class, [
                     'class' => Cible::class,
                     'query_builder' => function (CibleRepository $r) {
-                        return $r->createQueryBuilder('c')                      
-                            ->orderBy('c.name', 'ASC');     
+                        return $r->createQueryBuilder('c')
+                            ->orderBy('c.name', 'ASC');
                     },
                     'attr' => [
                         'class' => 'select2 select-choice mt-4'
@@ -141,14 +140,14 @@ class MissionType extends AbstractType
                     ],
                     'choice_label' => 'name',
                     'placeholder' => 'selectionner une cible',
-                    'multiple' => true, 
+                    'multiple' => true,
                     'required'=> true,
                 ])
             ->add('typeMission', EntityType::class, [
                     'class' => TypeMission::class,
                     'query_builder' => function (TypeMissionRepository $r) {
-                        return $r->createQueryBuilder('m')                      
-                            ->orderBy('m.name', 'ASC');     
+                        return $r->createQueryBuilder('m')
+                            ->orderBy('m.name', 'ASC');
                     },
                     'attr' => [
                         'class' => 'select2 select-choice mt-4'
@@ -164,8 +163,8 @@ class MissionType extends AbstractType
             ->add('specialite', EntityType::class, [
                     'class' => Specialite::class,
                     'query_builder' => function (SpecialiteRepository $r) {
-                        return $r->createQueryBuilder('s')                      
-                            ->orderBy('s.name', 'ASC');     
+                        return $r->createQueryBuilder('s')
+                            ->orderBy('s.name', 'ASC');
                     },
                     'attr' => [
                         'class' => 'select2 select-choice mt-4'
@@ -175,7 +174,7 @@ class MissionType extends AbstractType
                         'class' => 'form-label mt-4'
                     ],
                     'choice_label' => 'name',
-                    'placeholder' => 'selectionner une spécialité', 
+                    'placeholder' => 'selectionner une spécialité',
                     'required'=> true,
                 ])
             ->add('agent', EntityType::class, [
@@ -183,9 +182,9 @@ class MissionType extends AbstractType
                     'choice_label' => 'name',
                     'placeholder' => 'choisissez votre agent',
                     'query_builder' => function (AgentRepository $r) {
-                     return $r->createQueryBuilder('a')                      
-                       ->orderBy('a.name', 'ASC');     
-                     },
+                        return $r->createQueryBuilder('a')
+                          ->orderBy('a.name', 'ASC');
+                    },
                     'attr' => [
                         'class' => 'select2 mt-4'
                     ],
@@ -201,26 +200,26 @@ class MissionType extends AbstractType
             ->add('contact', EntityType::class, [
                     'class' => Contact::class,
                     'query_builder' => function (ContactRepository $r) {
-                        return $r->createQueryBuilder('c')                      
-                            ->orderBy('c.name', 'ASC');     
+                        return $r->createQueryBuilder('c')
+                            ->orderBy('c.name', 'ASC');
                     },
                     'attr' => [
-                        'class' => 'select2 select-choice mt-4'
+                       'class' => 'select2 select-choice mt-4'
                     ],
                     'label' => 'Les contacts',
                     'label_attr' => [
-                        'class' => 'form-label mt-4'
+                       'class' => 'form-label mt-4'
                     ],
                     'choice_label' => 'name',
                     'placeholder' => 'selectionner un contact',
-                    'multiple' => true, 
+                    'multiple' => true,
                     'required'=> true,
                 ])
             ->add('planque', EntityType::class, [
                     'class' => Planque::class,
                     'query_builder' => function (PlanqueRepository $r) {
-                        return $r->createQueryBuilder('p')                      
-                            ->orderBy('p.type', 'ASC');     
+                        return $r->createQueryBuilder('p')
+                            ->orderBy('p.type', 'ASC');
                     },
                     'attr' => [
                         'class' => 'select2 select-choice mt-4'
@@ -236,8 +235,8 @@ class MissionType extends AbstractType
             ->add('statut', EntityType::class, [
                     'class' => Statut::class,
                     'query_builder' => function (StatutRepository $r) {
-                        return $r->createQueryBuilder('s')                      
-                            ->orderBy('s.name', 'ASC');     
+                        return $r->createQueryBuilder('s')
+                            ->orderBy('s.name', 'ASC');
                     },
                     'attr' => [
                         'class' => 'select2 select-choice mt-4'
@@ -259,29 +258,27 @@ class MissionType extends AbstractType
 
 
 
-            $builder->get('pays')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
-                $form = $event->getForm();
-                $dataContact = ($event->getForm()->getParent()->get('pays')->getData());
-                $dataPlanque = ($event->getForm()->getParent()->get('pays')->getData());
-    
-                //function qui permet de mettre à jour les champs Contact et Planque en function de selection du champs Pays
-                $this->addContactPlanque($form->getParent(), $dataContact, $dataPlanque);
-            });
+        $builder->get('pays')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+            $form = $event->getForm();
+            $dataContact = ($event->getForm()->getParent()->get('pays')->getData());
+            $dataPlanque = ($event->getForm()->getParent()->get('pays')->getData());
 
-            $builder->get('specialite')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
-               
-                $form = $event->getForm();
-    
-                $dataspecialite = ($event->getForm()->getParent()->get('specialite')->getData());
-                $dataCible = ($event->getForm()->getParent()->get('cible')->getData());
-                
-                //function pour verifier si le champs cible a une valeur
-                $listeCible = $this->listeCible($dataCible);
-                
-                //function qui permet de mettre à jour le champs Agent en function de selection du champs cible ou spécialité requise
-                $this->addAgentRequis($form->getParent(), $dataspecialite, $listeCible);
-    
-                });
+            //function qui permet de mettre à jour les champs Contact et Planque en function de selection du champs Pays
+            $this->addContactPlanque($form->getParent(), $dataContact, $dataPlanque);
+        });
+
+        $builder->get('specialite')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+            $form = $event->getForm();
+
+            $dataspecialite = ($event->getForm()->getParent()->get('specialite')->getData());
+            $dataCible = ($event->getForm()->getParent()->get('cible')->getData());
+
+            //function pour verifier si le champs cible a une valeur
+            $listeCible = $this->listeCible($dataCible);
+
+            //function qui permet de mettre à jour le champs Agent en function de selection du champs cible ou spécialité requise
+            $this->addAgentRequis($form->getParent(), $dataspecialite, $listeCible);
+        });
     }
 
 
@@ -292,13 +289,13 @@ class MissionType extends AbstractType
      * @param [type] $dataCible
      * @return void
      */
-    private function listeCible($dataCible){
-        if($dataCible->isEmpty()){
+    private function listeCible($dataCible)
+    {
+        if ($dataCible->isEmpty()) {
             $liste = [0];
             return $liste;
-        }else {
-            foreach ($dataCible->toArray() as $dept )
-            {
+        } else {
+            foreach ($dataCible->toArray() as $dept) {
                 $tableau []= $dept->getNationalite();
                 $liste = $tableau;
                 return $liste;
@@ -314,79 +311,79 @@ class MissionType extends AbstractType
      * @param [type] $dataPlanque
      * @return void
      */
-    private function addContactPlanque($form, $dataContact, $dataPlanque){
+    private function addContactPlanque($form, $dataContact, $dataPlanque)
+    {
+        $listePlanque = $this->planqueRepository->createQueryBuilder('p')
+            ->where('p.pays IN (:pays)')
+            ->setParameter('pays', $dataPlanque)
+            ->getQuery()
+            ->getResult();
 
-            $listePlanque = $this->planqueRepository->createQueryBuilder('p')
-                ->where('p.pays IN (:pays)')
-                ->setParameter('pays', $dataPlanque)
-                ->getQuery()
-                ->getResult();
-                
-            $listeContact = $this->contactRepository->createQueryBuilder('c')
-                ->where('c.nationalite NOT IN (:nationalite)')
-                ->setParameter('nationalite', $dataContact)
-                ->getQuery()
-                ->getResult();
-                
+        $listeContact = $this->contactRepository->createQueryBuilder('c')
+            ->where('c.nationalite NOT IN (:nationalite)')
+            ->setParameter('nationalite', $dataContact)
+            ->getQuery()
+            ->getResult();
 
-            $form->add('contact', EntityType::class, [
-                'class' => Contact::class,
-                'query_builder' => function (ContactRepository $r) {
-                    return $r->createQueryBuilder('c')
-                        ->orderBy('c.name', 'ASC');     
-                },
-                'choices' => $listeContact ? $listeContact : [],
-                'attr' => [
-                    'class' => 'select2  mt-4'
-                ],
-                'label' => 'Les contacts',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'choice_label' => 'name',
-                'multiple' => true, 
-            ]);
 
-            $form->add('planque', EntityType::class, [
-                'class' => Planque::class,
-                'query_builder' => function (PlanqueRepository $r) {
-                    return $r->createQueryBuilder('p')                      
-                        ->orderBy('p.type', 'ASC');     
-                },
-                'choices' => $listePlanque ? $listePlanque : [],
-                'attr' => [
-                    'class' => 'select2 select-choice mt-4'
-                ],
-                'label' => 'La planque',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'choice_label' => 'type',
-                'placeholder' => 'selectionner une planque',
-                'required' => false
-            ]);
+        $form->add('contact', EntityType::class, [
+            'class' => Contact::class,
+            'query_builder' => function (ContactRepository $r) {
+                return $r->createQueryBuilder('c')
+                    ->orderBy('c.name', 'ASC');
+            },
+            'choices' => $listeContact ? $listeContact : [],
+            'attr' => [
+                'class' => 'select2  mt-4'
+            ],
+            'label' => 'Les contacts',
+            'label_attr' => [
+                'class' => 'form-label mt-4'
+            ],
+            'choice_label' => 'name',
+            'multiple' => true,
+        ]);
+
+        $form->add('planque', EntityType::class, [
+            'class' => Planque::class,
+            'query_builder' => function (PlanqueRepository $r) {
+                return $r->createQueryBuilder('p')
+                    ->orderBy('p.type', 'ASC');
+            },
+            'choices' => $listePlanque ? $listePlanque : [],
+            'attr' => [
+                'class' => 'select2 select-choice mt-4'
+            ],
+            'label' => 'La planque',
+            'label_attr' => [
+                'class' => 'form-label mt-4'
+            ],
+            'choice_label' => 'type',
+            'placeholder' => 'selectionner une planque',
+            'required' => false
+        ]);
     }
 
 
     /**
-     * cette fonction permet de remplacer le champ Agent en appliquant 
+     * cette fonction permet de remplacer le champ Agent en appliquant
      * des contraites de choix selon les paramétres sélectionner sur les champs
-     * "cible" et "spécialité" 
+     * "cible" et "spécialité"
      *
      * @param [type] $form
      * @param [type] $dataspecialite
      * @param [type] $liste
      * @return void
-     */ 
-    private function addAgentRequis($form, $dataspecialite, $liste){
-
+     */
+    private function addAgentRequis($form, $dataspecialite, $liste)
+    {
         $listeAgentrequis = $this->agentRepository->createQueryBuilder('a')
             ->leftJoin('a.specialite', 's')
             ->where('s.id IN (:id)')
             ->setParameter('id', $dataspecialite ? $dataspecialite : [0])
             ->getQuery()
             ->getResult();
-        
+
         $listeAgentCible = $this->agentRepository->createQueryBuilder('a')
             ->leftJoin('a.nationalite', 'n')
             ->where('n.id NOT IN (:id)')
@@ -394,15 +391,15 @@ class MissionType extends AbstractType
             ->getQuery()
             ->getResult();
 
-      
+
         $form->add('agent', EntityType::class, [
             'class' => Agent::class,
             'choice_label' => 'name',
             'placeholder' => 'choisissez votre agent',
             'choices' => $listeAgentCible ? $listeAgentCible : [],
             'query_builder' => function (AgentRepository $r) {
-              return $r->createQueryBuilder('a')                      
-                ->orderBy('a.name', 'ASC');     
+                return $r->createQueryBuilder('a')
+                  ->orderBy('a.name', 'ASC');
             },
             'attr' => [
                 'class' => 'select2 mt4'
@@ -412,22 +409,23 @@ class MissionType extends AbstractType
                 'class' => 'form-label mt-4'
             ],
             'choice_label' => 'name',
-            'multiple' => true, 
+            'multiple' => true,
             'preferred_choices' => $listeAgentrequis,
             'constraints' => [
               new Assert\Callback([
-                  // Ici $value prend la valeur du champs que l'on est en train de valider, 
-                  'callback' => static function ($value, ExecutionContextInterface $context) use ($listeAgentrequis){
-                        //dd($listeAgentrequis);
-                        //transforme valeur du champs Agent en tabeau pour comparer 
-                        $fiedAgent = $value->toArray();
-                        //compare resultat du champs Agent avec specialité requise, le resultat doit être superieur a 0
-                        $result = count(array_uintersect($fiedAgent, $listeAgentrequis, function($fiedAgent, $listeAgentrequis) {
-                            return strcmp(spl_object_hash($fiedAgent), spl_object_hash($listeAgentrequis));})) > 0;
-                        //si resultat superieur a 0, on peut continuer, sinon erreur + message
-                        if ($result == true ) {
-                        return; 
-                        } else {
+                  // Ici $value prend la valeur du champs que l'on est en train de valider,
+                  'callback' => static function ($value, ExecutionContextInterface $context) use ($listeAgentrequis) {
+                      //dd($listeAgentrequis);
+                      //transforme valeur du champs Agent en tabeau pour comparer
+                      $fiedAgent = $value->toArray();
+                      //compare resultat du champs Agent avec specialité requise, le resultat doit être superieur a 0
+                      $result = count(array_uintersect($fiedAgent, $listeAgentrequis, function ($fiedAgent, $listeAgentrequis) {
+                          return strcmp(spl_object_hash($fiedAgent), spl_object_hash($listeAgentrequis));
+                      })) > 0;
+                      //si resultat superieur a 0, on peut continuer, sinon erreur + message
+                      if ($result == true) {
+                          return;
+                      } else {
                           $context
                               ->buildViolation("Vous devez choisir au moins 1 agent avec la spécialité requise")
                               ->atPath('[agent]')
@@ -437,7 +435,7 @@ class MissionType extends AbstractType
               ]),
           ]
           ]);
-  }
+    }
 
 
 
@@ -450,4 +448,3 @@ class MissionType extends AbstractType
         ]);
     }
 }
-

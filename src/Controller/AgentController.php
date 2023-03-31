@@ -15,8 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AgentController extends AbstractController
 {
-
-
     /**
      * Cette fonction affiche tous les agent
      *
@@ -29,7 +27,7 @@ class AgentController extends AbstractController
     #[Route('/agent', name: 'agent.index', methods: ['GET'])]
     public function index(AgentRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
-            $agent = $paginator->paginate(
+        $agent = $paginator->paginate(
             $repository->findAll(), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             6 /*limit per page*/
@@ -52,7 +50,7 @@ class AgentController extends AbstractController
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $agent = new Agent();
-        $form = $this->createForm(AgentType::class, $agent,['labelButton' => 'Créer un agent']);
+        $form = $this->createForm(AgentType::class, $agent, ['labelButton' => 'Créer un agent']);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +61,7 @@ class AgentController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre agent a été crée avec succès !'       
+                'Votre agent a été crée avec succès !'
             );
 
             return $this->redirectToRoute('agent.index');
@@ -85,7 +83,6 @@ class AgentController extends AbstractController
     #[Route('/agent/edition/{id}', name: 'agent.edit', methods: ['GET', 'POST'])]
     public function edit(Agent $agent, Request $request, EntityManagerInterface $manager): Response
     {
-        
         $form = $this->createForm(agentType::class, $agent);
         $form->handleRequest($request);
 
@@ -107,8 +104,8 @@ class AgentController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-     
-    
+
+
 
     /**
      * Cette fonction permet de supprimer un agent
@@ -121,15 +118,13 @@ class AgentController extends AbstractController
     #[Route('/agent/suppression/{id}', name: 'agent.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Agent $agent): Response
     {
-       $manager->remove($agent);
-       $manager->flush();
-       $this->addFlash(
-        'success',
-        'Votre agent a été supprimé avec succès !'
-    );
+        $manager->remove($agent);
+        $manager->flush();
+        $this->addFlash(
+            'success',
+            'Votre agent a été supprimé avec succès !'
+        );
 
-    return $this->redirectToRoute('agent.index');
-
+        return $this->redirectToRoute('agent.index');
     }
 }
-

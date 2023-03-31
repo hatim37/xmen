@@ -21,7 +21,7 @@ class PlanqueType extends AbstractType
             'attr' => [
                 'class' => 'form-control'
             ],
-            'label' => 'Code', 
+            'label' => 'Code',
             'required' => true,
             'label_attr' => [
                 'class' => 'form-label mt-4'
@@ -31,7 +31,7 @@ class PlanqueType extends AbstractType
             'attr' => [
                 'class' => 'form-control'
             ],
-            'label' => 'Adresse', 
+            'label' => 'Adresse',
             'required' => true,
             'label_attr' => [
                 'class' => 'form-label mt-4'
@@ -55,7 +55,7 @@ class PlanqueType extends AbstractType
                     'minlength' => '2',
                     'maxlength' => '50'
                 ],
-                'label' => 'Type', 
+                'label' => 'Type',
                 'required' => true,
                 'label_attr' => [
                     'class' => 'form-label mt-4'
@@ -66,7 +66,7 @@ class PlanqueType extends AbstractType
                 'class' => 'btn btn-primary mt-4',
             ],
             'label' => $options['labelButton'],
-            
+
             ]);
     }
 

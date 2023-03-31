@@ -14,9 +14,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
-{   
-    
-    
+{
     /**
      * Cette fonction permet de modifier un utilisateur
      *
@@ -29,24 +27,21 @@ class UserController extends AbstractController
     #[Route('/utilistateur/edition/{id}', name: 'user.edit', methods: ['GET', 'POST'])]
     public function edit(User $choosenUser, Request $request, EntityManagerInterface $manager): Response
     {
-
         $form = $this->createForm(userType::class, $choosenUser);
 
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            
+        if ($form->isSubmitted() && $form->isValid()) {
             $choosenUser->setUpdatedAt(new \DateTimeImmutable());
-                $user = $form->getData();
-                $manager->persist($choosenUser);
-                $manager->flush();
+            $user = $form->getData();
+            $manager->persist($choosenUser);
+            $manager->flush();
 
-                $this->addFlash(
-                    'success',
-                    'Votre compte a été modifié avec succès !'
-                );
+            $this->addFlash(
+                'success',
+                'Votre compte a été modifié avec succès !'
+            );
 
-                return $this->redirectToRoute('mission.index');
- 
+            return $this->redirectToRoute('mission.index');
         }
 
         return $this->render('pages/user/edit.html.twig', [
@@ -54,7 +49,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    
+
     /**
      * fonction pour changer le mot de passe
      *
@@ -66,7 +61,7 @@ class UserController extends AbstractController
      */
     #[Security("is_granted('ROLE_ADMIN') and user === choosenUser")]
     #[Route('/utilisateur/edition-mot-de-passe/{id}', 'user.edit.password', methods: ['GET', 'POST'])]
-    public function editPassword(User $choosenUser, Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response 
+    public function editPassword(User $choosenUser, Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response
     {
         $form = $this->createForm(UserPasswordType::class);
 
@@ -100,4 +95,3 @@ class UserController extends AbstractController
         ]);
     }
 }
-

@@ -10,11 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class specialiteTest extends WebTestCase
 {
-    
     public function testIfCreateSpecialiteIsSuccessfull(): void
     {
-        
-
         $client = static::createClient();
 
         $urlGenerator = $client->getContainer()->get('router');
@@ -26,17 +23,17 @@ class specialiteTest extends WebTestCase
         $client->loginUser($user);
 
         $crawler = $client->request(Request::METHOD_GET, $urlGenerator->generate('specialite.new'));
-        
+
         $form = $crawler->filter('form[name=specialite]')->form([
             'specialite[name]' => "Spécialité"
         ]);
-        
+
         $client->submit($form);
-        
+
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
         $client->followRedirect();
-       
+
         $this->assertSelectorTextContains('div.alert-success', 'Votre spécialité a été créé avec succès !');
 
         $this->assertRouteSame('specialite.index');
@@ -70,7 +67,7 @@ class specialiteTest extends WebTestCase
 
         $user = $entityManager->find(User::class, 1);
         $specialite = $entityManager->getRepository(Specialite::class)->find(7);
-        
+
 
         $client->loginUser($user);
 
@@ -121,5 +118,4 @@ class specialiteTest extends WebTestCase
 
         $this->assertRouteSame('specialite.index');
     }
-   
 }

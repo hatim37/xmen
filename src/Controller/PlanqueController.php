@@ -25,11 +25,11 @@ class PlanqueController extends AbstractController
      */
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/planque', name: 'planque.index', methods: ['GET'])]
-    public function index( PlanqueRepository $repository, PaginatorInterface $paginator, Request $request): Response
+    public function index(PlanqueRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
-            $planque = $paginator->paginate(
+        $planque = $paginator->paginate(
             $repository->findAll(),
-             /* query NOT result */
+            /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             6 /*limit per page*/
         );
@@ -53,10 +53,10 @@ class PlanqueController extends AbstractController
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $planque = new Planque();
-        $form = $this->createForm(PlanqueType::class, $planque,['labelButton' => 'Créer une mission']);
+        $form = $this->createForm(PlanqueType::class, $planque, ['labelButton' => 'Créer une mission']);
 
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $planque = $form->getData();
 
@@ -65,7 +65,7 @@ class PlanqueController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre planque a été créé avec succès !'       
+                'Votre planque a été créé avec succès !'
             );
 
             return $this->redirectToRoute('planque.index');
@@ -87,7 +87,6 @@ class PlanqueController extends AbstractController
     #[Route('/planque/edition/{id}', name: 'planque.edit', methods: ['GET', 'POST'])]
     public function edit(Planque $planque, Request $request, EntityManagerInterface $manager): Response
     {
-        
         $form = $this->createForm(PlanqueType::class, $planque);
         $form->handleRequest($request);
 
@@ -122,15 +121,13 @@ class PlanqueController extends AbstractController
     #[Route('/planque/suppression/{id}', name: 'planque.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, planque $planque): Response
     {
-       $manager->remove($planque);
-       $manager->flush();
-       $this->addFlash(
-        'success',
-        'Votre planque a été supprimée avec succès !'
-    );
+        $manager->remove($planque);
+        $manager->flush();
+        $this->addFlash(
+            'success',
+            'Votre planque a été supprimée avec succès !'
+        );
 
-    return $this->redirectToRoute('planque.index');
-
+        return $this->redirectToRoute('planque.index');
     }
 }
-

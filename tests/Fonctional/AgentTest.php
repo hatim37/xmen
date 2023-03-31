@@ -10,10 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AgentTest extends WebTestCase
 {
-    
     public function testIfCreateIngredientIsSuccessfull(): void
     {
-        
         $client = static::createClient();
 
         $urlGenerator = $client->getContainer()->get('router');
@@ -25,7 +23,7 @@ class AgentTest extends WebTestCase
         $client->loginUser($user);
 
         $crawler = $client->request(Request::METHOD_GET, $urlGenerator->generate('agent.new'));
-        
+
         $form = $crawler->filter('form[name=agent]')->form([
             'agent[name]' => "NewAgent",
             'agent[firstName]' => 'AgentName',
@@ -34,13 +32,13 @@ class AgentTest extends WebTestCase
             'agent[nationalite]' => "3",
             'agent[specialite]' => ["4"]
         ]);
-        
+
         $client->submit($form);
-        
+
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
         $client->followRedirect();
-       
+
         $this->assertSelectorTextContains('div.alert-success', 'Votre agent a été crée avec succès !');
 
         $this->assertRouteSame('agent.index');
@@ -74,7 +72,7 @@ class AgentTest extends WebTestCase
 
         $user = $entityManager->find(User::class, 1);
         $agent = $entityManager->getRepository(Agent::class)->find(3);
-        
+
 
         $client->loginUser($user);
 
@@ -130,5 +128,4 @@ class AgentTest extends WebTestCase
 
         $this->assertRouteSame('agent.index');
     }
-   
 }

@@ -20,7 +20,7 @@ class SpecialiteType extends AbstractType
                 'minlength' => '2',
                 'maxlength' => '50'
             ],
-            'label' => 'Nom', 
+            'label' => 'Nom',
             'required' => true,
             'label_attr' => [
                 'class' => 'form-label mt-4'

@@ -8,7 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class AgentTest extends KernelTestCase
 {
-
     public function getEntity(): Agent
     {
         return (new Agent())
@@ -43,4 +42,3 @@ class AgentTest extends KernelTestCase
         $this->assertCount(1, $errors);
     }
 }
-

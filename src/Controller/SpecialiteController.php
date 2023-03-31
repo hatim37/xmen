@@ -27,7 +27,7 @@ class SpecialiteController extends AbstractController
     #[Route('/specialite', name: 'specialite.index', methods: ['GET'])]
     public function index(SpecialiteRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
-            $specialite = $paginator->paginate(
+        $specialite = $paginator->paginate(
             $repository->findAll(), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             6 /*limit per page*/
@@ -50,7 +50,7 @@ class SpecialiteController extends AbstractController
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $specialite = new Specialite();
-        $form = $this->createForm(SpecialiteType::class, $specialite,['labelButton' => 'Créer une spécialité']);
+        $form = $this->createForm(SpecialiteType::class, $specialite, ['labelButton' => 'Créer une spécialité']);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -61,7 +61,7 @@ class SpecialiteController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre spécialité a été créé avec succès !'       
+                'Votre spécialité a été créé avec succès !'
             );
 
             return $this->redirectToRoute('specialite.index');
@@ -83,7 +83,6 @@ class SpecialiteController extends AbstractController
     #[Route('/specialite/edition/{id}', name: 'specialite.edit', methods: ['GET', 'POST'])]
     public function edit(Specialite $specialite, Request $request, EntityManagerInterface $manager): Response
     {
-        
         $form = $this->createForm(SpecialiteType::class, $specialite);
         $form->handleRequest($request);
 
@@ -106,7 +105,7 @@ class SpecialiteController extends AbstractController
         ]);
     }
 
-    
+
 
     /**
      * Cette fonction permet de supprimer une specialité
@@ -119,15 +118,13 @@ class SpecialiteController extends AbstractController
     #[Route('/specialite/suppression/{id}', name: 'specialite.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Specialite $specialite): Response
     {
-       $manager->remove($specialite);
-       $manager->flush();
-       $this->addFlash(
-        'success',
-        'Votre spécialité a été supprimée avec succès !'
-    );
+        $manager->remove($specialite);
+        $manager->flush();
+        $this->addFlash(
+            'success',
+            'Votre spécialité a été supprimée avec succès !'
+        );
 
-    return $this->redirectToRoute('specialite.index');
-
+        return $this->redirectToRoute('specialite.index');
     }
 }
-

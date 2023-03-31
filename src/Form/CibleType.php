@@ -12,7 +12,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
 class CibleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -22,7 +21,7 @@ class CibleType extends AbstractType
             'attr' => [
                 'class' => 'form-control',
             ],
-            'label' => 'Nom', 
+            'label' => 'Nom',
             'required' => true,
             'label_attr' => [
                 'class' => 'form-label mt-4'
@@ -32,7 +31,7 @@ class CibleType extends AbstractType
             'attr' => [
                 'class' => 'form-control',
             ],
-            'label' => 'Prénom', 
+            'label' => 'Prénom',
             'required' => true,
             'label_attr' => [
                 'class' => 'form-label mt-4'
@@ -43,17 +42,17 @@ class CibleType extends AbstractType
             'attr' => [
                 'class' => 'form-control'
             ],
-            'label' => 'Date de naissance', 
+            'label' => 'Date de naissance',
             'required' => true,
             'label_attr' => [
                 'class' => 'form-label mt-4'
-            ],  
+            ],
             ])
         ->add('codeName', TextType::class, [
             'attr' => [
                 'class' => 'form-control',
             ],
-            'label' => 'Nom de code', 
+            'label' => 'Nom de code',
             'required' => true,
             'label_attr' => [
                 'class' => 'form-label mt-4'

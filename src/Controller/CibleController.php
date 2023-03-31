@@ -27,7 +27,7 @@ class CibleController extends AbstractController
     #[Route('/cible', name: 'cible.index', methods: ['GET'])]
     public function index(CibleRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
-            $cible = $paginator->paginate(
+        $cible = $paginator->paginate(
             $repository->findAll(), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             6 /*limit per page*/
@@ -50,7 +50,7 @@ class CibleController extends AbstractController
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $cible = new Cible();
-        $form = $this->createForm(CibleType::class, $cible,['labelButton' => 'Créer une cible']);
+        $form = $this->createForm(CibleType::class, $cible, ['labelButton' => 'Créer une cible']);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -61,7 +61,7 @@ class CibleController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre cible a été créé avec succès !'       
+                'Votre cible a été créé avec succès !'
             );
 
             return $this->redirectToRoute('cible.index');
@@ -83,7 +83,6 @@ class CibleController extends AbstractController
     #[Route('/cible/edition/{id}', name: 'cible.edit', methods: ['GET', 'POST'])]
     public function edit(Cible $cible, Request $request, EntityManagerInterface $manager): Response
     {
-        
         $form = $this->createForm(CibleType::class, $cible);
         $form->handleRequest($request);
 
@@ -117,14 +116,13 @@ class CibleController extends AbstractController
     #[Route('/cible/suppression/{id}', name: 'cible.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Cible $cible): Response
     {
-       $manager->remove($cible);
-       $manager->flush();
-       $this->addFlash(
-        'success',
-        'Votre cible a été supprimée avec succès !'
-    );
+        $manager->remove($cible);
+        $manager->flush();
+        $this->addFlash(
+            'success',
+            'Votre cible a été supprimée avec succès !'
+        );
 
-    return $this->redirectToRoute('cible.index');
-
+        return $this->redirectToRoute('cible.index');
     }
 }

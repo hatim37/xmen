@@ -27,7 +27,7 @@ class ContactController extends AbstractController
     #[Route('/contact', name: 'contact.index', methods: ['GET'])]
     public function index(ContactRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
-            $contact = $paginator->paginate(
+        $contact = $paginator->paginate(
             $repository->findAll(), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             6 /*limit per page*/
@@ -50,7 +50,7 @@ class ContactController extends AbstractController
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $contact = new Contact();
-        $form = $this->createForm(ContactType::class, $contact,['labelButton' => 'Créer un contact']);
+        $form = $this->createForm(ContactType::class, $contact, ['labelButton' => 'Créer un contact']);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -61,7 +61,7 @@ class ContactController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre contact a été créé avec succès !'       
+                'Votre contact a été créé avec succès !'
             );
 
             return $this->redirectToRoute('contact.index');
@@ -83,7 +83,6 @@ class ContactController extends AbstractController
     #[Route('/contact/edition/{id}', name: 'contact.edit', methods: ['GET', 'POST'])]
     public function edit(Contact $contact, Request $request, EntityManagerInterface $manager): Response
     {
-        
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
@@ -117,14 +116,13 @@ class ContactController extends AbstractController
     #[Route('/contact/suppression/{id}', name: 'contact.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Contact $contact): Response
     {
-       $manager->remove($contact);
-       $manager->flush();
-       $this->addFlash(
-        'success',
-        'Votre contact a été supprimé avec succès !'
-    );
+        $manager->remove($contact);
+        $manager->flush();
+        $this->addFlash(
+            'success',
+            'Votre contact a été supprimé avec succès !'
+        );
 
-    return $this->redirectToRoute('contact.index');
-
+        return $this->redirectToRoute('contact.index');
     }
 }

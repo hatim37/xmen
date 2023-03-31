@@ -52,7 +52,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
     }
@@ -64,7 +65,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
      /**
      * Get the value of name
-     */ 
+     */
     public function getName()
     {
         return $this->name;
@@ -74,7 +75,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Set the value of name
      *
      * @return  self
-     */ 
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -84,7 +85,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the value of firstName
-     */ 
+     */
     public function getFirstName()
     {
         return $this->firstName;
@@ -94,7 +95,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Set the value of firstName
      *
      * @return  self
-     */ 
+     */
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
@@ -145,7 +146,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the value of createdAt
-     */ 
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -155,7 +156,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Set the value of createdAt
      *
      * @return  self
-     */ 
+     */
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
@@ -165,7 +166,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the value of updatedAt
-     */ 
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
@@ -175,7 +176,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Set the value of updatedAt
      *
      * @return  self
-     */ 
+     */
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
@@ -185,7 +186,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the value of plainPassword
-     */ 
+     */
     public function getPlainPassword()
     {
         return $this->plainPassword;
@@ -195,7 +196,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Set the value of plainPassword
      *
      * @return  self
-     */ 
+     */
     public function setPlainPassword($plainPassword)
     {
         $this->plainPassword = $plainPassword;
@@ -225,10 +226,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    } 
+    }
 
-    public function getFullName() {
-
+    public function getFullName()
+    {
         return $this->name.' '.$this->firstName;
     }
 }

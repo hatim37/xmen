@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -17,7 +18,7 @@ class RegenerateAppSecretCommand extends Command
 {
     protected function configure(): void
     {
-        $this->addArgument('envfile', InputArgument::REQUIRED, 'env File {.env, .env.local}');   
+        $this->addArgument('envfile', InputArgument::REQUIRED, 'env File {.env, .env.local}');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -39,6 +40,6 @@ class RegenerateAppSecretCommand extends Command
             return Command::SUCCESS;
         }
         $io->error("You did not provide a valid environment file to change");
-        return Command::INVALID;       
+        return Command::INVALID;
     }
 }

@@ -10,11 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class cibleTest extends WebTestCase
 {
-    
     public function testIfCreateCibleIsSuccessfull(): void
     {
-        
-
         $client = static::createClient();
 
         $urlGenerator = $client->getContainer()->get('router');
@@ -26,7 +23,7 @@ class cibleTest extends WebTestCase
         $client->loginUser($user);
 
         $crawler = $client->request(Request::METHOD_GET, $urlGenerator->generate('cible.new'));
-        
+
         $form = $crawler->filter('form[name=cible]')->form([
             'cible[name]' => "NewCible",
             'cible[firstName]' => 'CibleName',
@@ -34,13 +31,13 @@ class cibleTest extends WebTestCase
             'cible[codeName]' => "nom de code",
             'cible[nationalite]' => "3"
         ]);
-        
+
         $client->submit($form);
-        
+
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
         $client->followRedirect();
-       
+
         $this->assertSelectorTextContains('div.alert-success', 'Votre cible a été créé avec succès !');
 
         $this->assertRouteSame('cible.index');
@@ -74,7 +71,7 @@ class cibleTest extends WebTestCase
 
         $user = $entityManager->find(User::class, 1);
         $cible = $entityManager->getRepository(Cible::class)->find(3);
-        
+
 
         $client->loginUser($user);
 
@@ -129,5 +126,4 @@ class cibleTest extends WebTestCase
 
         $this->assertRouteSame('cible.index');
     }
-   
 }

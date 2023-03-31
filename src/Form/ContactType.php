@@ -21,7 +21,7 @@ class ContactType extends AbstractType
             'attr' => [
                 'class' => 'form-control'
             ],
-            'label' => 'Nom', 
+            'label' => 'Nom',
             'required' => true,
             'label_attr' => [
                 'class' => 'form-label mt-4'
@@ -31,7 +31,7 @@ class ContactType extends AbstractType
             'attr' => [
                 'class' => 'form-control'
             ],
-            'label' => 'Prénom', 
+            'label' => 'Prénom',
             'required' => true,
             'label_attr' => [
                 'class' => 'form-label mt-4'
@@ -42,7 +42,7 @@ class ContactType extends AbstractType
             'attr' => [
                 'class' => 'form-control'
             ],
-            'label' => 'Date de naissance', 
+            'label' => 'Date de naissance',
             'required' => true,
             'label_attr' => [
                 'class' => 'form-label mt-4'
@@ -52,7 +52,7 @@ class ContactType extends AbstractType
             'attr' => [
                 'class' => 'form-control'
             ],
-            'label' => 'Nom de code', 
+            'label' => 'Nom de code',
             'required' => true,
             'label_attr' => [
                 'class' => 'form-label mt-4'
