@@ -59,68 +59,69 @@
 					</span>
 				{% endfor %}
 			</li>
-			<li class="list-group-item text-muted">Contacts :
+			<li class="list-group-item text-muted">
 				{% for contact in mission.contact %}
+					<span class="agent text-muted">Contacts :</span>
 					<span class="agent text-white">
 						{{ contact.name }}
 						{{ contact.firstName }}</span>&thinsp;Nationalité :
-					<span class="agent text-white">{{ contact.nationalite }}</span>
-				{% endfor %}
-			</li>
-			<li class="list-group-item text-muted">Spécialité requise :
-				<span class="agent text-white">{{ mission.specialite }}</span>
-			</li>
-			<li class="list-group-item text-muted">Planque :
-				<span class="agent text-white">
-					{% if mission.planque %}
-						{{ mission.planque }}
-					{% else %}
-						
-					{% endif %}
+					<span class="agent text-white">{{ contact.nationalite }}</br>
 				</span>
-				<span class="text-muted">&thinsp; adresse :</span>
-				<span class="agent text-white">
-					{% if mission.planque.address|default(null) %}
-						{{ mission.planque.address }}
+			{% endfor %}
+		</li>
+		<li class="list-group-item text-muted">Spécialité requise :
+			<span class="agent text-white">{{ mission.specialite }}</span>
+		</li>
+		<li class="list-group-item text-muted">Planque :
+			<span class="agent text-white">
+				{% if mission.planque %}
+					{{ mission.planque }}
 					{% else %}
-						
-					{% endif %}
-				</span>
-				<span class="text-muted">&thinsp; pays :</span>
-				<span class="agent text-white">
-					{% if mission.planque.pays|default(null) %}
-						{{ mission.planque.pays }}
+
+				{% endif %}
+			</span>
+			<span class="text-muted">&thinsp; adresse :</span>
+			<span class="agent text-white">
+				{% if mission.planque.address|default(null) %}
+					{{ mission.planque.address }}
 					{% else %}
-						
-					{% endif %}
-				</span>
-			</li>
+
+				{% endif %}
+			</span>
+			<span class="text-muted">&thinsp; pays :</span>
+			<span class="agent text-white">
+				{% if mission.planque.pays|default(null) %}
+					{{ mission.planque.pays }}
+					{% else %}
+
+				{% endif %}
+			</span>
+		</li>
 
 
-		</ul>
-		<div class="card-footer text-muted">
-			<div>
-				Statut :
-				<span class="text-white">{{ mission.Statut }}</span>
+	</ul>
+	<div class="card-footer text-muted">
+		<div>
+			Statut :
+			<span class="text-white">{{ mission.Statut }}</span>
+		</div>
+		<div>
+			Début de la mission :
+			{{ mission.DateStart|date('d/m/Y') }}</div>
+		<div>
+			Fin de mission :
+			{{ mission.DateEnd|date('d/m/Y') }}</div>
+	</div>
+
+</div>
+<div class="card">
+	<div class="card-body menu-card">
+		<a href="{{ path('home.index') }}" class="btn btn-info">Retour à la liste</a>
+		{% if app.user %}
+			<div class="menu-card-btn">
+				<a href="{{ path('mission.edit', { id: mission.id }) }}" class="btn btn-info ">Modifier</a>
+				<a href="{{ path('mission.delete', { id: mission.id }) }}" class="btn btn-danger">Supprimer</a>
 			</div>
-			<div>
-				Début de la mission :
-				{{ mission.DateStart|date('d/m/Y') }}</div>
-			<div>
-				Fin de mission :
-				{{ mission.DateEnd|date('d/m/Y') }}</div>
-		</div>
-
+		{% endif %}
 	</div>
-	<div class="card">
-		<div class="card-body menu-card">
-			<a href="{{ path('home.index') }}" class="btn btn-info">Retour à la liste</a>
-			{% if app.user %}
-				<div class="menu-card-btn">
-					<a href="{{ path('mission.edit', { id: mission.id }) }}" class="btn btn-info ">Modifier</a>
-					<a href="{{ path('mission.delete', { id: mission.id }) }}" class="btn btn-danger">Supprimer</a>
-				</div>
-			{% endif %}
-		</div>
-	</div>
-</div></div>{% endblock %}
+</div></div></div>{% endblock %}

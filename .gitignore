@@ -19,3 +19,5 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
+.php-cs-fixer.cache
+/.php-cs-fixer.cache

@@ -95,7 +95,12 @@ class Specialite
 
         return $this;
     }
-
+    /**
+     * Undocumented function
+     *
+     * @param Mission $mission
+     * @return self
+     */
     public function removeMission(Mission $mission): self
     {
         if ($this->missions->removeElement($mission)) {

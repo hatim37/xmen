@@ -10,13 +10,23 @@ class UserListener
     public function __construct(private UserPasswordHasherInterface $hasher)
     {
     }
-
-    public function prePersist(User $user)
+    /**
+     * Undocumented function
+     *
+     * @param User $user
+     * @return void
+     */
+    public function prePersist(User $user) : void
     {
         $this->encodePassword($user);
     }
-
-    public function preUpdate(User $user)
+    /**
+     * Undocumented function
+     *
+     * @param User $user
+     * @return void
+     */
+    public function preUpdate(User $user) : void
     {
         $this->encodePassword($user);
     }

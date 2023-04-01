@@ -191,7 +191,6 @@ class Mission
         return $this;
     }
 
-
     public function getSpecialite(): ?Specialite
     {
         return $this->specialite;
