@@ -58,9 +58,9 @@ Un formulaire de connexion permet à un administrateur de configurer tous les d�
 
     - Vous pouvez créer un compte administrateur pour vous connectez et gérer la base de donnée. Saisir la commande :  
 
-        php bin/console app:create-administrator
+            php bin/console app:create-administrator
 
-            Puis renseigner un nom, un prénom, un email et un mot de passe.
+        Puis renseigner un nom, un prénom, un email et un mot de passe.
             
 
 ------------------------------
