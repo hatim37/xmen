@@ -40,7 +40,6 @@ display: flex;
   margin: 0px 10px;
 }
 
-
 .list-group-item, .card {
   border: 1px solid var(--bs-blue);
 }
@@ -48,12 +47,6 @@ display: flex;
 .description {
   border-top: 1px solid var(--bs-blue);
 }
-
-.text-white {
-
-  margin: 0px 5px;
-}
-
 
 .table-texte-size {
   font-size: 0.65rem;
@@ -173,10 +166,23 @@ width: 100%;
   
   .colonne {
     display: flex;
-  
   }
-  
 }
+
+/*
+*
+** ......../ card /.......... *
+*
+*/
+
+
+@media screen and (min-width: 768px) {
+  
+  .card_mobile {
+    max-width: 20rem;
+  }
+}
+
 
 
 

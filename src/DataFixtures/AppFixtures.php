@@ -66,7 +66,7 @@ class AppFixtures extends Fixture
 
         //nationalites
         $nationalites = [];
-        for ($i = 0; $i < 30; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $nationalite = new Nationalite();
             $nationalite->setName($this->faker->country());
             $nationalites[] = $nationalite;
@@ -76,7 +76,7 @@ class AppFixtures extends Fixture
 
         //Specialites
         $specialites =[];
-        for ($i=0; $i < 20; $i++) {
+        for ($i=0; $i < 10; $i++) {
             $specialite = new Specialite();
             $specialite->setName($this->faker->jobTitle());
             $specialites[] = $specialite;
@@ -106,7 +106,7 @@ class AppFixtures extends Fixture
 
         //pays
         $country =[];
-        for ($i=0; $i < 15; $i++) {
+        for ($i=0; $i < 10; $i++) {
             $pays = new Pays();
             $pays->setName($this->faker->country())
                 ->setNationalite($nationalites[mt_rand(0, count($nationalites) - 1)]);
@@ -116,7 +116,7 @@ class AppFixtures extends Fixture
 
         //cibles
         $cibles =[];
-        for ($i=0; $i < 20; $i++) {
+        for ($i=0; $i < 10; $i++) {
             $cible = new Cible();
             $cible->setName($this->faker->name())
                 ->setFirstName($this->faker->firstName())
@@ -142,7 +142,7 @@ class AppFixtures extends Fixture
 
         //planques
         $planques =[];
-        for ($i=0; $i < 20; $i++) {
+        for ($i=0; $i < 10; $i++) {
             $planque = new Planque();
             $planque->setCode(mt_rand(0, 10000))
                 ->setAddress($this->faker->address())
@@ -172,7 +172,7 @@ class AppFixtures extends Fixture
 
 
         $missions =[];
-        for ($i=0; $i < 20; $i++) {
+        for ($i=0; $i < 15; $i++) {
             $mission = new Mission();
             $mission->setTitle($this->faker->words(1, true))
                 ->setDescription($this->faker->text(100))
@@ -211,8 +211,6 @@ class AppFixtures extends Fixture
                 );
             }
         }
-
-
         $manager->flush();
     }
 }

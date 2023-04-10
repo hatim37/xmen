@@ -59,7 +59,7 @@ class MissionType extends AbstractType
                     'maxlength' => '255'
                 ],
                 'label' => 'Titre de la mission',
-                'required' => false,
+                'required' => true,
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ]
@@ -71,7 +71,7 @@ class MissionType extends AbstractType
                     'maxlength' => '255'
                 ],
                 'label' => 'Nom de code',
-                'required' => false,
+                'required' => true,
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ]
@@ -80,7 +80,7 @@ class MissionType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'required' => false,
+                'required' => true,
                 'label' => 'Description',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
@@ -92,7 +92,7 @@ class MissionType extends AbstractType
                     'class' => 'form-control'
                 ],
                 'label' => 'Date de début',
-                'required' => false,
+                'required' => true,
                 'by_reference' => true,
                 'label_attr' => [
                     'class' => 'form-label mt-4'
@@ -104,7 +104,7 @@ class MissionType extends AbstractType
                     'class' => 'form-control'
                 ],
                 'label' => 'Date de fin',
-                'required' => false,
+                'required' => true,
                 'by_reference' => true,
                 'label_attr' => [
                     'class' => 'form-label mt-4'
@@ -125,7 +125,7 @@ class MissionType extends AbstractType
                 ],
                 'choice_label' => 'name',
                 'placeholder' => 'selectionner un pays',
-                'required' => false,
+                'required' => true,
             ])
             ->add('cible', EntityType::class, [
                 'class' => Cible::class,
@@ -143,7 +143,7 @@ class MissionType extends AbstractType
                 'choice_label' => 'name',
                 'placeholder' => 'selectionner une cible',
                 'multiple' => true,
-                'required' => false,
+                'required' => true,
             ])
             ->add('typeMission', EntityType::class, [
                 'class' => TypeMission::class,
@@ -160,7 +160,7 @@ class MissionType extends AbstractType
                 ],
                 'choice_label' => 'name',
                 'placeholder' => 'selectionner une cible',
-                'required' => false,
+                'required' => true,
             ])
             ->add('specialite', EntityType::class, [
                 'class' => Specialite::class,
@@ -177,7 +177,7 @@ class MissionType extends AbstractType
                 ],
                 'choice_label' => 'name',
                 'placeholder' => 'selectionner une spécialité',
-                'required' => false,
+                'required' => true,
             ])
             ->add('agent', EntityType::class, [
                 'class' => Agent::class,
@@ -195,7 +195,7 @@ class MissionType extends AbstractType
                     'class' => 'form-label mt-4'
                 ],
                 'multiple' => true,
-                'required' => false,
+                'required' => true,
             ])
             ->add('contact', EntityType::class, [
                 'class' => Contact::class,
@@ -213,7 +213,7 @@ class MissionType extends AbstractType
                 'choice_label' => 'name',
                 'placeholder' => 'selectionner un contact',
                 'multiple' => true,
-                'required' => false,
+                'required' => true,
             ])
             ->add('planque', EntityType::class, [
                 'class' => Planque::class,
@@ -247,7 +247,7 @@ class MissionType extends AbstractType
                 ],
                 'choice_label' => 'name',
                 'placeholder' => 'selectionner un statut',
-                'required' => false,
+                'required' => true,
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
@@ -261,7 +261,7 @@ class MissionType extends AbstractType
         $builder->get('pays')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
             $form = $event->getForm();
             $datapays = ($event->getForm()->getParent()->get('pays')->getData());
-            $datapays2 = ($event->getForm()->getParent()->get('pays')->getData()->getNationalite());
+            $datapays2 = ($event->getForm()->getParent()->get('pays')->getData());
 
             //function qui permet de mettre à jour les champs Contact et Planque en function de selection du champs Pays
             $this->addContactPlanque($form->getParent(), $datapays, $datapays2);
@@ -275,7 +275,6 @@ class MissionType extends AbstractType
             
             //function pour verifier si le champs cible a une valeur
             $listeCible = $this->listeCible($dataCible);
-            //dd($listeCible);
 
             //function qui permet de mettre à jour le champs Agent en function de selection du champ 'cible' ou 'spécialité requise'.
             $this->addAgentRequis($form->getParent(), $dataspecialite, $listeCible);
@@ -292,17 +291,18 @@ class MissionType extends AbstractType
      * @param ?ArrayCollection $dataCible
      * @return array
      */
-    private function listeCible($dataCible): array
-    {
-             if ($dataCible->isEmpty()){
-                return [0];
-                }else {
-                    $tableau = [];
-                    foreach ($dataCible->toArray() as $dept) {
-                        $tableau [] = $dept->getNationalite();
-                    }
-                    return $tableau;
-                } 
+    private function listeCible($dataCible){
+        if($dataCible->isEmpty()){
+            $liste = [0];
+            return $liste;
+        }else {
+            foreach ($dataCible->toArray() as $dept )
+            {
+                $tableau []= $dept->getNationalite();
+                $liste = $tableau;
+                return $liste;
+            }
+        }
     }
 
     /**
@@ -322,11 +322,11 @@ class MissionType extends AbstractType
             ->getResult();
 
         $listeContact = $this->contactRepository->createQueryBuilder('c')
-            ->where('c.nationalite NOT IN (:nationalite)')
-            ->setParameter('nationalite', $datapays2)
+            ->where('c.nationalite IN (:nationalite)')
+            ->setParameter('nationalite', $datapays2 ? $datapays2->getNationalite() : [])
             ->getQuery()
             ->getResult();
-
+       
         $form->add('contact', EntityType::class, [
             'class' => Contact::class,
             'query_builder' => function (ContactRepository $r) {
@@ -350,7 +350,7 @@ class MissionType extends AbstractType
 
                         //transforme valeur du champs Agent en tabeau pour comparer
                         $fiedContact = $value->toArray();
-
+                        
                         //compare la valeur sélectionner avec la liste des choix obtenue par pays, le resultat doit être superieur a 0
                         $result = count(array_uintersect($fiedContact, $listeContact, function ($fiedContact, $listeContact) {
                             return strcmp(spl_object_hash($fiedContact), spl_object_hash($listeContact));
@@ -360,8 +360,8 @@ class MissionType extends AbstractType
                             return;
                         } else {
                             $context
-                                ->buildViolation("Vous devez choisir au moins 1 agent avec la spécialité requise")
-                                ->atPath('[agent]')
+                                ->buildViolation("Vous devez choisir au moins un contact")
+                                ->atPath('[contact]')
                                 ->addViolation();
                         }
                         if ($value->isEmpty()) {
@@ -373,7 +373,9 @@ class MissionType extends AbstractType
                         } else {
                             return;
                         }
-                    },
+                        
+                    } 
+                    
                 ]),
             ]
         ]);
@@ -417,7 +419,7 @@ class MissionType extends AbstractType
             ->setParameter('id', $dataspecialite)
             ->getQuery()
             ->getResult();
-
+        
         $listeAgentCible = $this->agentRepository->createQueryBuilder('a')
             ->leftJoin('a.nationalite', 'n')
             ->where('n.id NOT IN (:id)')
@@ -437,7 +439,7 @@ class MissionType extends AbstractType
             'attr' => [
                 'class' => 'select2 mt4'
             ],
-            'label' => 'Les agents : sélectionnez au moins 1 agent avec la sépcialité requise en haut de la liste',
+            'label' => 'Les agents',
             'label_attr' => [
                 'class' => 'form-label mt-4'
             ],
@@ -448,10 +450,10 @@ class MissionType extends AbstractType
                     // Ici $value prend la valeur du champs que l'on est en train de valider,
                     'callback' => static function ($value, ExecutionContextInterface $context) use ($listeAgentrequis) {
 
-                        //transforme valeur du champs Agent en tabeau pour comparer
+                        //transforme valeur du champs Agent en tabeau pour être comparée
                         $fiedAgent = $value->toArray();
-
-                        //compare resultat du champs Agent avec specialité requise, le resultat doit être superieur a 0
+                        
+                        //compare le résultat du champ Agent avec specialité requise, le resultat doit être superieur a 0
                         $result = count(array_uintersect($fiedAgent, $listeAgentrequis, function ($fiedAgent, $listeAgentrequis) {
                             return strcmp(spl_object_hash($fiedAgent), spl_object_hash($listeAgentrequis));
                         })) > 0;
@@ -460,7 +462,7 @@ class MissionType extends AbstractType
                             return;
                         } else {
                             $context
-                                ->buildViolation("Vous devez choisir au moins 1 agent avec la spécialité requise")
+                                ->buildViolation("Vous devez choisir au moins 1 agent avec la spécialité requise parmis la sélection en haut de la liste")
                                 ->atPath('[agent]')
                                 ->addViolation();
                         }

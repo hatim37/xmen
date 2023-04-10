@@ -4,7 +4,7 @@
 
 {% block body %}
 
-	<div class="container test">
+	<div class="container">
 		<h1 class="mt-4">Nos agents</h1>
 		{% if not agent.items is same as ([]) %}
         
@@ -20,10 +20,10 @@
     	{% endfor %}
 			
 
-		<div class="row row-cols-1 row-cols-md-3 g-4 mt-4 mb-10">
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-4 mt-4 mb-10 ">
 			{% for agent in agent %}
 				<div class="col">
-					<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+					<div class="card text-white bg-primary mb-3 card_mobile"  >
 						<div class="card-header">Code : <span class="text-white">{{ agent.identificationCode }}</span></div>
 						<div class="card-body">
 							<h5 class="card-title text-muted"> Nom : <span class="text-white">{{ agent.name }} {{ agent.firstname }}</span></h5>
@@ -31,7 +31,6 @@
 							<p class="card-text text-muted">Nationalité :  <span class="text-white">{{ agent.nationalite }}</span></p>
 							<p class="card-text text-muted">Spécialité : {% for specialite in agent.specialite %}<span class="text-white">{{ specialite.name }}</span>{% endfor %}</p>
 						</div>
-				
 						<div class= "d-flex justify-content-evenly m-4">
 							<a href="{{ path('agent.edit', { id: agent.id }) }}" class="btn btn-info">Modifier</a>
 							<a href="{{ path('agent.delete', { id: agent.id }) }}" class="btn btn-danger">Supprimer</a>

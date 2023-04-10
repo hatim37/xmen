@@ -22,9 +22,8 @@
 		<div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
 			{% for planque in planque %}
 				<div class="col">
-					<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+					<div class="card text-white bg-primary mb-3 card_mobile">
 						<div class="card-header">Code : {{ planque.code }}</div>
-						<img class="card-img-top" src="..." alt="Card image cap">
 						<div class="card-body">
 							<h5 class="card-title">Type : {{ planque.type }}</h5>
 							<p class="card-text">Adresse : {{ planque.address }}</p>

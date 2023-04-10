@@ -18,6 +18,7 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
-
+vendor/
+.php-cs-fixer.cache
 .php-cs-fixer.cache
 /.php-cs-fixer.cache

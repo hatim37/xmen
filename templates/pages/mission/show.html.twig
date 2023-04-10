@@ -10,10 +10,10 @@
 
 		<div class="card mb-3 texte-size-show">
 			<div class="mission_detail_titre card-header">
-				<h4 class="card-header text-muted">Mission :
+				<h4 class="card-header text-muted">Mission :&thinsp; 
 					<span class="agent text-white">{{ mission.title }}</span>
 				</h4>
-				<h4 class="card-header text-muted">Nom de code :
+				<h4 class="card-header text-muted">Nom de code :&thinsp; 
 					<span class="agent text-white">{{ mission.codeName }}</span>
 				</h4>
 			</div>
@@ -22,12 +22,9 @@
 				<img class="mission_image" src="{{ asset('/asset/images/detail-mission.png') }}" alt="image du film Xmen"></img>
 		</div>
 		<div class="card-body">
-
-			<h6 class="card-subtitle text-muted ">Pays :<span class="agent text-white">{{ mission.pays }}</span>
+			<h6 class="card-subtitle text-muted ">Pays :&thinsp; <span class="agent text-white">{{ mission.pays }}</span>
 			</h6>
 		</div>
-
-
 		<div class="card-body description">
 			<p class="card-text text-muted">Description :</p>
 			<p class="card-text">{{ mission.description }}</p>
@@ -39,8 +36,7 @@
 					<span class="agent text-white">
 						{{ cible.name }}
 						{{cible.firstName}}<span class="text-muted">&thinsp; Nationalité :</span>
-						<span class="agent text-white">{{ cible.nationalite }}</br>
-					</span>
+						<span class="agent text-white">{{ cible.nationalite }}</br></span>
 				{% endfor %}
 			</li>
 			<li class="list-group-item text-muted">Type de mission :
@@ -49,14 +45,14 @@
 			<li class="list-group-item text-muted">Spécialité requise :
 				<span class="agent text-white">{{ mission.specialite }}</span>
 			</li>
+			
 			<li class="list-group-item text-muted">
 				{% for agent in mission.agent %}
-					<span class="agent text-muted">Agents :</span>
+					<span class="agent text-muted">Agents :
 					<span class="agent text-white">
 						{{ agent.name }}
-						{{ agent.firstName }}<span class="text-muted">&thinsp; Nationalité :</span>
-						<span class="agent text-white">{{ agent.nationalite }}</br>
-					</span>
+						{{ agent.firstName }}</span> &thinsp; Nationalité :
+					<span class="agent text-white">{{ agent.nationalite }}</br></span>
 				{% endfor %}
 			</li>
 			<li class="list-group-item text-muted">
@@ -65,8 +61,7 @@
 					<span class="agent text-white">
 						{{ contact.name }}
 						{{ contact.firstName }}</span>&thinsp;Nationalité :
-					<span class="agent text-white">{{ contact.nationalite }}</br>
-				</span>
+					<span class="agent text-white">{{ contact.nationalite }}</br></span>
 			{% endfor %}
 		</li>
 		<li class="list-group-item text-muted">Spécialité requise :
@@ -77,7 +72,6 @@
 				{% if mission.planque %}
 					{{ mission.planque }}
 					{% else %}
-
 				{% endif %}
 			</span>
 			<span class="text-muted">&thinsp; adresse :</span>
@@ -93,12 +87,9 @@
 				{% if mission.planque.pays|default(null) %}
 					{{ mission.planque.pays }}
 					{% else %}
-
 				{% endif %}
 			</span>
 		</li>
-
-
 	</ul>
 	<div class="card-footer text-muted">
 		<div>
@@ -112,7 +103,6 @@
 			Fin de mission :
 			{{ mission.DateEnd|date('d/m/Y') }}</div>
 	</div>
-
 </div>
 <div class="card">
 	<div class="card-body menu-card">
