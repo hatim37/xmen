@@ -44,7 +44,7 @@ Un formulaire de connexion permet à un administrateur de configurer tous les d�
 
 
 
-- **Création des tables dans la base donnée :**
+- Création des tables dans la base donnée :
 
         php bin/console d:m:m
 
