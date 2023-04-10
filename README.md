@@ -8,48 +8,50 @@ Un formulaire de connexion permet à un administrateur de configurer tous les d�
 ----------------------
 
 ## Instructions  
-**Pré-requis**
+### Pré-requis
 
 - composer version 2.5.1
 - php 8.1
 
 
-**Déploiement local** 
+### Déploiement local 
 
 - Récuperer le projet github en local :  
 
-    depuis votre terminal taper :    
-    git clone https://github.com/hatim37/xmen.git
+    Depuis votre terminal taper :
+    
+         git clone https://github.com/hatim37/xmen.git
 
 
-- installer les dépendances, depuis le terminal : 
+- Installer les dépendances, depuis le terminal :
 
-    composer install
+        composer install
 
 
 - la clé APP_SECRET n'est pas fourni, pour génerer une Clé dans votre .env taper la commande suivante dans votre terminal :
 
-    php bin/console secret:regenerate-app-secret .env
+        php bin/console secret:regenerate-app-secret .env
 
 
 - Configurer votre fichier .env pour se connecter à la base de donnée: 
 
-DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=15&charset=utf8"
+        DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=15&charset=utf8"
 
 
-- Création de la base de donnée : 
+- Création de la base de donnée :
 
-    php bin/console d:d:c
+        php bin/console d:d:c
 
 
-- Création des tables dans la base donnée : 
 
-    php bin/console d:m:m
+- **Création des tables dans la base donnée :**
+
+        php bin/console d:m:m
 
 
 - En environement "dev" vous pouvez géner des fixtures : 
 
-    php bin/console doctrine:fixtures:load
+        php bin/console doctrine:fixtures:load
 
 
 - Compte administrateur :
@@ -64,4 +66,5 @@ DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=15&ch
 ------------------------------
 
 *Mes remerciments à tous les formateurs de studi-school qui déploient beaucoup d'efforts pour nous fournir des cours de qualité et nous transmettre les savoirs-faires pour réussir notre projet professionnelle*
+
 
