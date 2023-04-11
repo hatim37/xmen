@@ -49,7 +49,7 @@ Un formulaire de connexion permet à un administrateur de configurer tous les d�
         php bin/console d:m:m
 
 
-- En environement "dev" vous pouvez géner des fixtures : 
+- En environement "dev" vous pouvez génerer des fixtures : 
 
         php bin/console doctrine:fixtures:load
 
