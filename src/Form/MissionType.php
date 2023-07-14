@@ -109,7 +109,7 @@ class MissionType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ]
-            ])
+                ])
             ->add('pays', EntityType::class, [
                 'class' => Pays::class,
                 'query_builder' => function (PaysRepository $r) {
@@ -263,7 +263,7 @@ class MissionType extends AbstractType
             $datapays = ($event->getForm()->getParent()->get('pays')->getData());
             $datapays2 = ($event->getForm()->getParent()->get('pays')->getData());
 
-            //function qui permet de mettre à jour les champs Contact et Planque en function de selection du champs Pays
+            //fonction qui permet de mettre à jour les champ Contact et Planque en function de selection du champ Pays
             $this->addContactPlanque($form->getParent(), $datapays, $datapays2);
         });
 
@@ -273,10 +273,10 @@ class MissionType extends AbstractType
             $dataspecialite = ($event->getForm()->getParent()->get('specialite')->getData());
             $dataCible = ($event->getForm()->getParent()->get('cible')->getData());
             
-            //function pour verifier si le champs cible a une valeur
+            //fonction pour verifier si le champ cible a une valeur, si vide alors elle renvoi 0.
             $listeCible = $this->listeCible($dataCible);
 
-            //function qui permet de mettre à jour le champs Agent en function de selection du champ 'cible' ou 'spécialité requise'.
+            //fonction qui permet de mettre à jour le champ Agent en fonction de selection du champ 'cible' ou 'spécialité requise'.
             $this->addAgentRequis($form->getParent(), $dataspecialite, $listeCible);
         });
     }
@@ -284,7 +284,7 @@ class MissionType extends AbstractType
 
    
     /**
-     * Cette function permet de verifier si une valeur dans le champs Cible existe
+     * Cette function permet de verifier si une valeur dans le champ Cible existe
      * si elle n'esite pas alors elle renvoi 0. 
      * sinon elle renvoi la nationalité de la cible sélectionner.
      *
@@ -306,8 +306,7 @@ class MissionType extends AbstractType
     }
 
     /**
-     * Cette fonction permet de remplacer les champs Contact et Planque selon
-     * le pays sélectionné
+     * Cette fonction permet de remplacer les champs Contact et Planque selon le pays sélectionné
      *
      * @param FormInterface $form
      * @param void $datapays
@@ -348,7 +347,7 @@ class MissionType extends AbstractType
                     // Ici $value prend la valeur du champs que l'on est en train de valider,
                     'callback' => static function ($value, ExecutionContextInterface $context) use ($listeContact){
 
-                        //transforme valeur du champs Agent en tabeau pour comparer
+                        //transforme valeur du champs Contact en tabeau pour comparer
                         $fiedContact = $value->toArray();
                         
                         //compare la valeur sélectionner avec la liste des choix obtenue par pays, le resultat doit être superieur a 0
@@ -373,9 +372,7 @@ class MissionType extends AbstractType
                         } else {
                             return;
                         }
-                        
                     } 
-                    
                 ]),
             ]
         ]);
@@ -447,10 +444,10 @@ class MissionType extends AbstractType
             'preferred_choices' => $listeAgentrequis,
             'constraints' => [
                 new Assert\Callback([
-                    // Ici $value prend la valeur du champs que l'on est en train de valider,
+                    // Ici $value prend la valeur du champ que l'on est en train de valider,
                     'callback' => static function ($value, ExecutionContextInterface $context) use ($listeAgentrequis) {
 
-                        //transforme valeur du champs Agent en tabeau pour être comparée
+                        //transforme valeur du champ Agent en tabeau pour être comparée
                         $fiedAgent = $value->toArray();
                         
                         //compare le résultat du champ Agent avec specialité requise, le resultat doit être superieur a 0

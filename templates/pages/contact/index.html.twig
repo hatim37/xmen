@@ -11,9 +11,10 @@
 		<h3>
 			<div class="count mt-4">Nous avons {{ contact.getTotalItemCount }} contacts disponibles</div>
 		</h3>
-
+		{% if app.user %}
         <a href="{{ path('contact.new') }}" class="btn btn-primary ">Ajouter une contact</a>
-   
+		{% endif %}
+
 		{% for message in app.flashes('success') %}
         <div class="alert alert-success mt-3">
         {{ message }}</div>
@@ -23,16 +24,18 @@
 			{% for contact in contact %}
 				<div class="col">
 					<div class="card text-white bg-primary mb-3 card_mobile" >
-						<div class="card-header">Nom de code : <span class="text-white">{{ contact.codeName }}</span></div>
+						<div class="card-header">Nom de code : <span class="text-white">&thinsp; {{ contact.codeName }}</span></div>
 						<div class="card-body">
-							<h5 class="card-title text-muted"> Nom : <span class="text-white">{{ contact.name }} {{ contact.firstname }}</span></h5>
-							<p class="card-text text-muted">Né le : <span class=" text-white">{{ contact.dateOfBirth | date('j/m/Y') }}</span></p>
-							<p class="card-text text-muted">Nationalité :  <span class="text-white">{{ contact.nationalite }}</span></p>
+							<h5 class="card-title text-muted"> Nom : <span class="text-white">&thinsp; {{ contact.name }} {{ contact.firstname }}</span></h5>
+							<p class="card-text text-muted">Né le : <span class=" text-white">&thinsp; {{ contact.dateOfBirth | date('j/m/Y') }}</span></p>
+							<p class="card-text text-muted">Nationalité :  <span class="text-white">&thinsp; {{ contact.nationalite }}</span></p>
 						</div>
+						{% if app.user %}
 						<div class= "d-flex justify-content-evenly m-4">
 							<a href="{{ path('contact.edit', { id: contact.id }) }}" class="btn btn-info">Modifier</a>
 							<a href="{{ path('contact.delete', { id: contact.id }) }}" class="btn btn-danger">Supprimer</a>
 						</div>
+						{% endif %}
 					</div>
 				</div>
 			{% endfor %}

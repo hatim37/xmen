@@ -23,7 +23,6 @@ class AgentController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[IsGranted('ROLE_ADMIN')]
     #[Route('/agent', name: 'agent.index', methods: ['GET'])]
     public function index(AgentRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {

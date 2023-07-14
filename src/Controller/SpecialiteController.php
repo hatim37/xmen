@@ -23,7 +23,6 @@ class SpecialiteController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[IsGranted('ROLE_ADMIN')]
     #[Route('/specialite', name: 'specialite.index', methods: ['GET'])]
     public function index(SpecialiteRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {

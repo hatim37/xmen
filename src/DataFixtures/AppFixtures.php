@@ -25,9 +25,6 @@ class AppFixtures extends Fixture
 
     private $specialiteRepository;
 
-
-
-
     public function __construct(SpecialiteRepository $specialiteRepository)
     {
         $this->faker = Factory::create('fr_FR');
@@ -37,7 +34,6 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $specialites = $this->specialiteRepository->findAll();
-
 
         //Users
         $users = [];
@@ -72,7 +68,6 @@ class AppFixtures extends Fixture
             $nationalites[] = $nationalite;
             $manager->persist($nationalite);
         }
-
 
         //Specialites
         $specialites =[];

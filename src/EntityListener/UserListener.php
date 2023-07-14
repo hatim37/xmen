@@ -11,7 +11,7 @@ class UserListener
     {
     }
     /**
-     * Undocumented function
+     * Cette fonction prepersit le mot de passe
      *
      * @param User $user
      * @return void
@@ -21,7 +21,7 @@ class UserListener
         $this->encodePassword($user);
     }
     /**
-     * Undocumented function
+     * Cette fonction permet la mise a jour du mot de passe
      *
      * @param User $user
      * @return void

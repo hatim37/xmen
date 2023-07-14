@@ -23,7 +23,7 @@ class ContactController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[IsGranted('ROLE_ADMIN')]
+
     #[Route('/contact', name: 'contact.index', methods: ['GET'])]
     public function index(ContactRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {

@@ -23,7 +23,6 @@ class PlanqueController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[IsGranted('ROLE_ADMIN')]
     #[Route('/planque', name: 'planque.index', methods: ['GET'])]
     public function index(PlanqueRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {

@@ -23,7 +23,6 @@ class CibleController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[IsGranted('ROLE_ADMIN')]
     #[Route('/cible', name: 'cible.index', methods: ['GET'])]
     public function index(CibleRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {

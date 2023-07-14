@@ -84,11 +84,13 @@ width: 100%;
   display: block;
 }
 
+
+
 /* ......../ media query /.......... */
 @media screen and (min-width: 768px) {
   
   .card-header {
-    font-size: calc(1.275rem + .3vw);
+    font-size: 1.2rem;
     display: flex;
   }
   .table-texte-size {
@@ -174,7 +176,9 @@ width: 100%;
 ** ......../ card /.......... *
 *
 */
-
+.card-text {
+  margin-bottom: 0.3rem;
+}
 
 @media screen and (min-width: 768px) {
   

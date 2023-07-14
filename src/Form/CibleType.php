@@ -58,12 +58,6 @@ class CibleType extends AbstractType
                 'class' => 'form-label mt-4'
             ]
             ])
-        ->add('submit', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary mt-4',
-                ],
-                'label' => 'Créer une cible'
-                ])
         ->add('nationalite', EntityType::class, [
             'class' => Nationalite::class,
             'placeholder' => 'selectionner une nationalité',

@@ -11,8 +11,9 @@
 		<h3>
 			<div class="count mt-4">Nous avons {{ cible.getTotalItemCount }} cibles disponibles</div>
 		</h3>
-
+		{% if app.user %}
         <a href="{{ path('cible.new') }}" class="btn btn-primary ">Ajouter une cible</a>
+		{% endif %}
    
 		{% for message in app.flashes('success') %}
         <div class="alert alert-success mt-3">
@@ -23,16 +24,18 @@
 			{% for cible in cible %}
 				<div class="col">
 					<div class="card text-white bg-primary mb-3 card_mobile">
-						<div class="card-header">Nom de code : <span class="text-white">{{ cible.codeName }}</span></div>
+						<div class="card-header">Nom de code : <span class="text-white"> &thinsp; {{ cible.codeName }}</span></div>
 						<div class="card-body">
-							<h5 class="card-title text-muted"> Nom : <span class="text-white">{{ cible.name }} {{ cible.firstname }}</span></h5>
-							<p class="card-text text-muted">Né le : <span class=" text-white">{{ cible.dateOfBirth | date('j/m/Y') }}</span></p>
-							<p class="card-text text-muted">Nationalité :  <span class="text-white">{{ cible.nationalite }}</span></p>
+							<h5 class="card-title text-muted"> Nom : <span class="text-white">&thinsp;{{ cible.name }} {{ cible.firstname }}</span></h5>
+							<p class="card-text text-muted">Né le : <span class=" text-white">&thinsp;{{ cible.dateOfBirth | date('j/m/Y') }}</span></p>
+							<p class="card-text text-muted">Nationalité : <span class="text-white">&thinsp;{{ cible.nationalite }}</span></p>
 						</div>
+						{% if app.user %}
 						<div class= "d-flex justify-content-evenly m-4">
 							<a href="{{ path('cible.edit', { id: cible.id }) }}" class="btn btn-info">Modifier</a>
 							<a href="{{ path('cible.delete', { id: cible.id }) }}" class="btn btn-danger">Supprimer</a>
 						</div>
+						{% endif %}
 					</div>
 				</div>
 			{% endfor %}

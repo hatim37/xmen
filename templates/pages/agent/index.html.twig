@@ -11,9 +11,9 @@
 		<h3>
 			<div class="count mt-4">Nous avons {{ agent.getTotalItemCount }} agents disponibles</div>
 		</h3>
-
+		{% if app.user %}
         <a href="{{ path('agent.new') }}" class="btn btn-primary ">Ajouter un agent</a>
-   
+		{% endif %}
 		{% for message in app.flashes('success') %}
         <div class="alert alert-success mt-3">
         {{ message }}</div>
@@ -24,22 +24,26 @@
 			{% for agent in agent %}
 				<div class="col">
 					<div class="card text-white bg-primary mb-3 card_mobile"  >
-						<div class="card-header">Code : <span class="text-white">{{ agent.identificationCode }}</span></div>
+						<div class="card-header">Code : <span class="text-white">&thinsp; {{ agent.identificationCode }}</span></div>
 						<div class="card-body">
-							<h5 class="card-title text-muted"> Nom : <span class="text-white">{{ agent.name }} {{ agent.firstname }}</span></h5>
-							<p class="card-text text-muted">Né le : <span class=" text-white">{{ agent.dateOfBirth | date('j/m/Y') }}</span></p>
-							<p class="card-text text-muted">Nationalité :  <span class="text-white">{{ agent.nationalite }}</span></p>
-							<p class="card-text text-muted">Spécialité : {% for specialite in agent.specialite %}<span class="text-white">{{ specialite.name }}</span>{% endfor %}</p>
+							<h5 class="card-title text-muted"> Nom : <span class="text-white">&thinsp; {{ agent.name }} {{ agent.firstname }}</span></h5>
+							<p class="card-text text-muted">Né le : <span class=" text-white">&thinsp; {{ agent.dateOfBirth | date('j/m/Y') }}</span></p>
+							<p class="card-text text-muted">Nationalité :  <span class="text-white">&thinsp; {{ agent.nationalite }}</span></p>
+							<p class="card-text text-muted">Spécialité : {% for specialite in agent.specialite %}<span class="text-white">&thinsp; {{ specialite.name }}</span>{% endfor %}</p>
 						</div>
+						{% if app.user %}
 						<div class= "d-flex justify-content-evenly m-4">
 							<a href="{{ path('agent.edit', { id: agent.id }) }}" class="btn btn-info">Modifier</a>
 							<a href="{{ path('agent.delete', { id: agent.id }) }}" class="btn btn-danger">Supprimer</a>
 						</div>
+						{% endif %}
 					</div>
 				</div>
 			{% endfor %}
 		</div>
-		<div class="navigation d-flex justify-content-center mt-4 ">{{ knp_pagination_render(agent) }}</div>
+		<div class="navigation d-flex justify-content-center mt-4 ">
+		{{ knp_pagination_render(agent) }}
+		</div>
 		{% else %}
         <h4>Aucun agent n'a été trouvé</h4>
 		<a href="{{ path('agent.new') }}" class="btn btn-primary ">Ajouter un agent</a>
