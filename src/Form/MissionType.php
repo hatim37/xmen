@@ -109,7 +109,7 @@ class MissionType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ]
-                ])
+            ])
             ->add('pays', EntityType::class, [
                 'class' => Pays::class,
                 'query_builder' => function (PaysRepository $r) {
@@ -272,7 +272,7 @@ class MissionType extends AbstractType
 
             $dataspecialite = ($event->getForm()->getParent()->get('specialite')->getData());
             $dataCible = ($event->getForm()->getParent()->get('cible')->getData());
-            
+
             //fonction pour verifier si le champ cible a une valeur, si vide alors elle renvoi 0.
             $listeCible = $this->listeCible($dataCible);
 
@@ -282,7 +282,7 @@ class MissionType extends AbstractType
     }
 
 
-   
+
     /**
      * Cette function permet de verifier si une valeur dans le champ Cible existe
      * si elle n'esite pas alors elle renvoi 0. 
@@ -291,14 +291,14 @@ class MissionType extends AbstractType
      * @param ?ArrayCollection $dataCible
      * @return array
      */
-    private function listeCible($dataCible){
-        if($dataCible->isEmpty()){
+    private function listeCible($dataCible)
+    {
+        if ($dataCible->isEmpty()) {
             $liste = [0];
             return $liste;
-        }else {
-            foreach ($dataCible->toArray() as $dept )
-            {
-                $tableau []= $dept->getNationalite();
+        } else {
+            foreach ($dataCible->toArray() as $dept) {
+                $tableau[] = $dept->getNationalite();
                 $liste = $tableau;
                 return $liste;
             }
@@ -316,7 +316,7 @@ class MissionType extends AbstractType
     {
         $listePlanque = $this->planqueRepository->createQueryBuilder('p')
             ->where('p.pays IN (:pays)')
-            ->setParameter('pays',$datapays )
+            ->setParameter('pays', $datapays)
             ->getQuery()
             ->getResult();
 
@@ -325,7 +325,7 @@ class MissionType extends AbstractType
             ->setParameter('nationalite', $datapays2 ? $datapays2->getNationalite() : [])
             ->getQuery()
             ->getResult();
-       
+
         $form->add('contact', EntityType::class, [
             'class' => Contact::class,
             'query_builder' => function (ContactRepository $r) {
@@ -345,11 +345,11 @@ class MissionType extends AbstractType
             'constraints' => [
                 new Assert\Callback([
                     // Ici $value prend la valeur du champs que l'on est en train de valider,
-                    'callback' => static function ($value, ExecutionContextInterface $context) use ($listeContact){
+                    'callback' => static function ($value, ExecutionContextInterface $context) use ($listeContact) {
 
                         //transforme valeur du champs Contact en tabeau pour comparer
                         $fiedContact = $value->toArray();
-                        
+
                         //compare la valeur sélectionner avec la liste des choix obtenue par pays, le resultat doit être superieur a 0
                         $result = count(array_uintersect($fiedContact, $listeContact, function ($fiedContact, $listeContact) {
                             return strcmp(spl_object_hash($fiedContact), spl_object_hash($listeContact));
@@ -372,7 +372,7 @@ class MissionType extends AbstractType
                         } else {
                             return;
                         }
-                    } 
+                    }
                 ]),
             ]
         ]);
@@ -416,7 +416,7 @@ class MissionType extends AbstractType
             ->setParameter('id', $dataspecialite)
             ->getQuery()
             ->getResult();
-        
+
         $listeAgentCible = $this->agentRepository->createQueryBuilder('a')
             ->leftJoin('a.nationalite', 'n')
             ->where('n.id NOT IN (:id)')
@@ -449,17 +449,17 @@ class MissionType extends AbstractType
 
                         //transforme valeur du champ Agent en tabeau pour être comparée
                         $fiedAgent = $value->toArray();
-                        
-                        //compare le résultat du champ Agent avec specialité requise, le resultat doit être superieur a 0
+
+                        //compare le résultat du champ Agent avec specialité requise, le resultat doit être superieur à 0
                         $result = count(array_uintersect($fiedAgent, $listeAgentrequis, function ($fiedAgent, $listeAgentrequis) {
                             return strcmp(spl_object_hash($fiedAgent), spl_object_hash($listeAgentrequis));
                         })) > 0;
-                        //si resultat superieur a 0, on peut continuer, sinon erreur + message
+                        //si le résultat est superieur à 0, on peut continuer, sinon erreur + message
                         if ($result == true) {
                             return;
                         } else {
                             $context
-                                ->buildViolation("Vous devez choisir au moins 1 agent avec la spécialité requise parmis la sélection en haut de la liste")
+                                ->buildViolation("Vous devez choisir au moins 1 agent avec la spécialité requise parmi la sélection en haut de la liste")
                                 ->atPath('[agent]')
                                 ->addViolation();
                         }

@@ -119,6 +119,7 @@ class MissionController extends AbstractController
      * @param mission $mission
      * @return Response
      */
+    
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/mission/suppression/{id}', name: 'mission.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Mission $mission): Response
@@ -134,13 +135,8 @@ class MissionController extends AbstractController
     }
 
     #[Route('/mission/{id}', name: 'mission.show', methods: ['GET'])]
-    public function show(MissionRepository $repository, PaginatorInterface $paginator, Request $request, Mission $mission): Response
+    public function show( Mission $mission): Response
     {
-       //     $mission = $paginator->paginate(
-       //     $repository->findAll(), /* query NOT result */
-       //     $request->query->getInt('page', 1), /*page number*/
-       //     6 /*limit per page*/
-        // );
 
         return $this->render('pages/mission/show.html.twig', [
             'mission' => $mission,
